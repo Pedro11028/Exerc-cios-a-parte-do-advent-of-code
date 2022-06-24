@@ -1,0 +1,139 @@
+package com.mycompany.jogogalo;
+
+import java.awt.Color;
+import java.awt.FlowLayout;
+import java.awt.Font;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.util.ArrayList;
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import javax.swing.JTextField;
+
+public class JogoGalo extends JFrame {
+
+    JButton[] bt = new JButton[9];
+    int contadorX_Y = 1;
+    int[] validarXeY = new int[9];
+    private JButton button;
+
+    public JogoGalo() {
+        setVisible(true);
+        setTitle("Jogo do galo");
+        setDefaultCloseOperation(3);
+        setLayout(null);
+        setBounds(300, 200, 400, 400);
+        int butoes = 0;
+        for (int i = 0; i < 3; i++) {
+            for (int j = 0; j < 3; j++) {
+                bt[butoes] = new JButton();
+                bt[butoes].setFont(new Font("Arial", Font.PLAIN, 50));
+                add(bt[butoes]);
+                bt[butoes].setBounds((100 * i) + 50, (100 * j) + 50, 95, 95);
+                validarXeY[butoes]=0;
+                butoes++;
+            }
+        }
+        
+        bt[0].addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                int numeroButao=0;
+                if(validarXeY[0]==0){
+                   escreverX_Y(numeroButao);
+                                      validarXeY[0]=1;
+                }
+            }
+
+        });
+        bt[1].addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                int numeroButao=1;
+                if(validarXeY[1]==0){
+                   escreverX_Y(numeroButao);
+                   validarXeY[1]=1;
+                }
+            }
+        });
+        bt[2].addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                int numeroButao=2;
+                if(validarXeY[2]==0){
+                   escreverX_Y(numeroButao);
+                   validarXeY[2]=1;
+                }
+            }
+        });
+        bt[3].addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                int numeroButao=3;
+                 if(validarXeY[3]==0){
+                   escreverX_Y(numeroButao);
+                   validarXeY[3]=1;
+                }
+            }
+        });
+        bt[4].addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                int numeroButao=4;
+                if(validarXeY[4]==0){
+                   escreverX_Y(numeroButao);
+                   validarXeY[4]=1;
+                }
+            }
+        });
+        bt[5].addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                int numeroButao=5;
+                if(validarXeY[5]==0){
+                   escreverX_Y(numeroButao);
+                   validarXeY[5]=1;
+                }
+            }
+        });
+        bt[6].addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                int numeroButao=6;
+                if(validarXeY[6]==0){
+                   escreverX_Y(numeroButao);
+                   validarXeY[6]=1;
+                }
+            }
+        });
+        bt[7].addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                int numeroButao=7;
+                if(validarXeY[7]==0){
+                   escreverX_Y(numeroButao);
+                   validarXeY[7]=1;
+                }
+            }
+        });
+        bt[8].addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                int numeroButao=8;
+                if(validarXeY[8]==0){
+                   escreverX_Y(numeroButao);
+                   validarXeY[8]=1;
+                }
+            }
+        });
+        
+    }
+
+    private void escreverX_Y(int numeroButao) {
+        if (contadorX_Y == 1) {
+            bt[numeroButao].setText("X");
+            contadorX_Y=0;
+        } else {
+            bt[numeroButao].setText("O");
+            contadorX_Y=1;
+        }
+    }
+            
+    public static void main(String[] args) {
+        new JogoGalo();
+    }
+}
