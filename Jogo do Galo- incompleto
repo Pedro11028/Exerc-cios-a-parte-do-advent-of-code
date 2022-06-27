@@ -18,7 +18,7 @@ public class JogoGalo extends JFrame {
     JButton[] bt = new JButton[9];
     int contadorX_Y = 1;
     int[] validarXeY = new int[9];
-    private JButton button;
+    int encontrarEmpate = 0;
 
     public JogoGalo() {
         setVisible(true);
@@ -43,8 +43,8 @@ public class JogoGalo extends JFrame {
                 int numeroButao = 0;
                 if (validarXeY[0] == 0) {
                     escreverX_Y(numeroButao);
-                    verificarGanhadores();
                     validarXeY[0] = 1;
+                    verificarGanhadores();
                 }
             }
         });
@@ -54,6 +54,7 @@ public class JogoGalo extends JFrame {
                 if (validarXeY[1] == 0) {
                     escreverX_Y(numeroButao);
                     validarXeY[1] = 1;
+                    verificarGanhadores();
                 }
             }
         });
@@ -63,6 +64,7 @@ public class JogoGalo extends JFrame {
                 if (validarXeY[2] == 0) {
                     escreverX_Y(numeroButao);
                     validarXeY[2] = 1;
+                    verificarGanhadores();
                 }
             }
         });
@@ -72,6 +74,7 @@ public class JogoGalo extends JFrame {
                 if (validarXeY[3] == 0) {
                     escreverX_Y(numeroButao);
                     validarXeY[3] = 1;
+                    verificarGanhadores();
                 }
             }
         });
@@ -81,6 +84,7 @@ public class JogoGalo extends JFrame {
                 if (validarXeY[4] == 0) {
                     escreverX_Y(numeroButao);
                     validarXeY[4] = 1;
+                    verificarGanhadores();
                 }
             }
         });
@@ -90,6 +94,7 @@ public class JogoGalo extends JFrame {
                 if (validarXeY[5] == 0) {
                     escreverX_Y(numeroButao);
                     validarXeY[5] = 1;
+                    verificarGanhadores();
                 }
             }
         });
@@ -99,6 +104,7 @@ public class JogoGalo extends JFrame {
                 if (validarXeY[6] == 0) {
                     escreverX_Y(numeroButao);
                     validarXeY[6] = 1;
+                    verificarGanhadores();
                 }
             }
         });
@@ -108,6 +114,7 @@ public class JogoGalo extends JFrame {
                 if (validarXeY[7] == 0) {
                     escreverX_Y(numeroButao);
                     validarXeY[7] = 1;
+                    verificarGanhadores();
                 }
             }
         });
@@ -117,6 +124,7 @@ public class JogoGalo extends JFrame {
                 if (validarXeY[8] == 0) {
                     escreverX_Y(numeroButao);
                     validarXeY[8] = 1;
+                    verificarGanhadores();
                 }
             }
         });
@@ -134,14 +142,127 @@ public class JogoGalo extends JFrame {
     }
 
     private void verificarGanhadores() {
-        if (bt[0].getText() == "X" && bt[3].getText() == "X" && bt[6].getText() == "X")  {
-            JOptionPane.showMessageDialog(null, "Parabéns ao Jogador X por vencer", "Resultado Jogo", JOptionPane.INFORMATION_MESSAGE);
+        //Linhas horizontais na verificacao do X
+        if (bt[0].getText().equals("X") && bt[3].getText().equals("X") && bt[6].getText().equals("X")) {
+            JOptionPane.showMessageDialog(null, "Parabéns ao Jogador X por vencer!", "Resultado Jogo", JOptionPane.INFORMATION_MESSAGE);
+            encontrarEmpate = -1;
+            limparButoes();
         }
-        
-        if ((bt[0].getText() == "X" & bt[1].getText() == "X" & bt[2].getText() == "X") || (bt[3].getText() == "X" & bt[4].getText() == "X" & bt[5].getText() == "X") || (bt[6].getText() == "X" & bt[7].getText() == "X" & bt[8].getText() == "X")) {
-            JOptionPane.showMessageDialog(null, "Parabéns ao Jogador X por vencer", "Resultado Jogo", JOptionPane.INFORMATION_MESSAGE);
+        if (bt[1].getText().equals("X") && bt[4].getText().equals("X") && bt[7].getText().equals("X")) {
+            JOptionPane.showMessageDialog(null, "Parabéns ao Jogador X por vencer!", "Resultado Jogo", JOptionPane.INFORMATION_MESSAGE);
+            encontrarEmpate = -1;
+            limparButoes();
         }
-        
+        if (bt[2].getText().equals("X") && bt[5].getText().equals("X") && bt[8].getText().equals("X")) {
+            JOptionPane.showMessageDialog(null, "Parabéns ao Jogador X por vencer!", "Resultado Jogo", JOptionPane.INFORMATION_MESSAGE);
+            encontrarEmpate = -1;
+            limparButoes();
+        }
+
+        //Linhas verticais na verificacao do X
+        if (bt[0].getText().equals("X") && bt[1].getText().equals("X") && bt[2].getText().equals("X")) {
+            JOptionPane.showMessageDialog(null, "Parabéns ao Jogador X por vencer!", "Resultado Jogo", JOptionPane.INFORMATION_MESSAGE);
+            encontrarEmpate = -1;
+            limparButoes();
+        }
+        if (bt[3].getText().equals("X") && bt[4].getText().equals("X") && bt[5].getText().equals("X")) {
+            JOptionPane.showMessageDialog(null, "Parabéns ao Jogador X por vencer!", "Resultado Jogo", JOptionPane.INFORMATION_MESSAGE);
+            encontrarEmpate = -1;
+            limparButoes();
+        }
+        if (bt[6].getText().equals("X") && bt[7].getText().equals("X") && bt[8].getText().equals("X")) {
+            JOptionPane.showMessageDialog(null, "Parabéns ao Jogador X por vencer!", "Resultado Jogo", JOptionPane.INFORMATION_MESSAGE);
+            encontrarEmpate = -1;
+            limparButoes();
+        }
+
+        //Linhas horizontais na verificacao do O
+        if (bt[0].getText().equals("O") && bt[3].getText().equals("O") && bt[6].getText().equals("O")) {
+            JOptionPane.showMessageDialog(null, "Parabéns ao Jogador O por vencer!", "Resultado Jogo", JOptionPane.INFORMATION_MESSAGE);
+            encontrarEmpate = -1;
+            limparButoes();
+        }
+        if (bt[1].getText().equals("O") && bt[4].getText().equals("O") && bt[7].getText().equals("O")) {
+            JOptionPane.showMessageDialog(null, "Parabéns ao Jogador O por vencer!", "Resultado Jogo", JOptionPane.INFORMATION_MESSAGE);
+            encontrarEmpate = -1;
+            limparButoes();
+        }
+        if (bt[2].getText().equals("O") && bt[5].getText().equals("O") && bt[8].getText().equals("O")) {
+            JOptionPane.showMessageDialog(null, "Parabéns ao Jogador O por vencer!", "Resultado Jogo", JOptionPane.INFORMATION_MESSAGE);
+            encontrarEmpate = -1;
+            limparButoes();
+        }
+
+        //Linhas verticais na verificacao do O
+        if (bt[0].getText().equals("O") && bt[1].getText().equals("O") && bt[2].getText().equals("O")) {
+            JOptionPane.showMessageDialog(null, "Parabéns ao Jogador O por vencer!", "Resultado Jogo", JOptionPane.INFORMATION_MESSAGE);
+            encontrarEmpate = -1;
+            limparButoes();
+        }
+        if (bt[3].getText().equals("O") && bt[4].getText().equals("O") && bt[5].getText().equals("O")) {
+            JOptionPane.showMessageDialog(null, "Parabéns ao Jogador O por vencer!", "Resultado Jogo", JOptionPane.INFORMATION_MESSAGE);
+            encontrarEmpate = -1;
+            limparButoes();
+        }
+        if (bt[6].getText().equals("O") && bt[7].getText().equals("O") && bt[8].getText().equals("O")) {
+            JOptionPane.showMessageDialog(null, "Parabéns ao Jogador O por vencer!", "Resultado Jogo", JOptionPane.INFORMATION_MESSAGE);
+            encontrarEmpate = -1;
+            limparButoes();
+        }
+
+        if (bt[0].getText().equals("X") && bt[4].getText().equals("X") && bt[8].getText().equals("X")) {
+            JOptionPane.showMessageDialog(null, "Parabéns ao Jogador X por vencer!", "Resultado Jogo", JOptionPane.INFORMATION_MESSAGE);
+            encontrarEmpate = -1;
+            limparButoes();
+        }
+        if (bt[2].getText().equals("X") && bt[4].getText().equals("X") && bt[6].getText().equals("X")) {
+            JOptionPane.showMessageDialog(null, "Parabéns ao Jogador X por vencer!", "Resultado Jogo", JOptionPane.INFORMATION_MESSAGE);
+            encontrarEmpate = -1;
+            limparButoes();
+        }
+
+        if (bt[0].getText().equals("O") && bt[4].getText().equals("O") && bt[8].getText().equals("O")) {
+            JOptionPane.showMessageDialog(null, "Parabéns ao Jogador O por vencer!", "Resultado Jogo", JOptionPane.INFORMATION_MESSAGE);
+            encontrarEmpate = -1;
+            limparButoes();
+        }
+        if (bt[2].getText().equals("O") && bt[4].getText().equals("O") && bt[6].getText().equals("O")) {
+            JOptionPane.showMessageDialog(null, "Parabéns ao Jogador O por vencer!", "Resultado Jogo", JOptionPane.INFORMATION_MESSAGE);
+            encontrarEmpate = -1;
+            limparButoes();
+        }
+
+        if (encontrarEmpate == 8) {
+            JOptionPane.showMessageDialog(null, "Ups, parece que ouve um empate!", "Resultado Jogo", JOptionPane.INFORMATION_MESSAGE);
+            encontrarEmpate = 0;
+            limparButoes();
+        } else {
+            encontrarEmpate += 1;
+        }
+    }
+
+    private void limparButoes() {
+        bt[0].setText("");
+        bt[1].setText("");
+        bt[2].setText("");
+        bt[3].setText("");
+        bt[4].setText("");
+        bt[5].setText("");
+        bt[6].setText("");
+        bt[7].setText("");
+        bt[8].setText("");
+        validarXeY[0] = 0;
+        validarXeY[1] = 0;
+        validarXeY[2] = 0;
+        validarXeY[3] = 0;
+        validarXeY[4] = 0;
+        validarXeY[5] = 0;
+        validarXeY[6] = 0;
+        validarXeY[7] = 0;
+        validarXeY[8] = 0;
+
+        contadorX_Y = 1;
+
     }
 
     public static void main(String[] args) {
