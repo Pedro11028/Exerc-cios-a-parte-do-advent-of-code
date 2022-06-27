@@ -5,6 +5,7 @@ import java.awt.FlowLayout;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import static java.lang.Double.min;
 import java.util.ArrayList;
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -12,13 +13,18 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
+import java.util.Random;
 
 public class JogoGalo extends JFrame {
 
+    JButton playerVSplayer = new JButton();
+    JButton voltarMenu = new JButton();
+    JButton playerVsbot = new JButton();
     JButton[] bt = new JButton[9];
     int contadorX_Y = 1;
     int[] validarXeY = new int[9];
     int encontrarEmpate = 0;
+    int verificarEscolha = 0;
 
     public JogoGalo() {
         setVisible(true);
@@ -26,218 +32,506 @@ public class JogoGalo extends JFrame {
         setDefaultCloseOperation(3);
         setLayout(null);
         setBounds(300, 200, 400, 400);
-        int butoes = 0;
-        for (int i = 0; i < 3; i++) {
-            for (int j = 0; j < 3; j++) {
-                bt[butoes] = new JButton();
-                bt[butoes].setFont(new Font("Arial", Font.PLAIN, 50));
-                add(bt[butoes]);
-                bt[butoes].setBounds((100 * i) + 50, (100 * j) + 50, 95, 95);
-                validarXeY[butoes] = 0;
-                butoes++;
-            }
-        }
 
-        bt[0].addActionListener(new ActionListener() {
+        playerVSplayer.setFont(new Font("Arial", Font.PLAIN, 15));
+        add(playerVSplayer);
+        playerVSplayer.setText("Player vs Player");
+
+        playerVsbot.setFont(new Font("Arial", Font.PLAIN, 15));
+        add(playerVsbot);
+        playerVsbot.setText("Player vs bot");
+
+        playerVSplayer.setBounds((20), (100), 150, 50);
+        playerVsbot.setBounds((215), (100), 150, 50);
+
+        playerVSplayer.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                int numeroButao = 0;
-                if (validarXeY[0] == 0) {
-                    escreverX_Y(numeroButao);
-                    validarXeY[0] = 1;
-                    verificarGanhadores();
+                playerVsbot.setVisible(false);
+                playerVSplayer.setVisible(false);
+                getContentPane().removeAll();
+
+                voltarMenu.setFont(new Font("Calibri", Font.PLAIN, 10));
+                add(voltarMenu);
+                voltarMenu.setText("Voltar ao menu");
+                voltarMenu.setBounds((0), (0), 100, 30);
+                voltarMenu.setVisible(true);
+
+                int butoes = 0;
+                for (int i = 0; i < 3; i++) {
+                    for (int j = 0; j < 3; j++) {
+                        bt[butoes] = new JButton();
+                        bt[butoes].setFont(new Font("Arial", Font.PLAIN, 50));
+                        add(bt[butoes]);
+                        bt[butoes].setBounds((100 * i) + 50, (100 * j) + 50, 95, 95);
+                        validarXeY[butoes] = 0;
+                        butoes++;
+                    }
                 }
+                bt[0].addActionListener(new ActionListener() {
+                    public void actionPerformed(ActionEvent e) {
+                        int numeroButao = 0;
+                        if (validarXeY[0] == 0) {
+                            escreverX_Y(numeroButao);
+                            validarXeY[0] = 1;
+                            verificarGanhadores();
+                        }
+                    }
+                });
+                bt[1].addActionListener(new ActionListener() {
+                    public void actionPerformed(ActionEvent e) {
+                        int numeroButao = 1;
+                        if (validarXeY[1] == 0) {
+                            escreverX_Y(numeroButao);
+                            validarXeY[1] = 1;
+                            verificarGanhadores();
+                        }
+                    }
+                });
+                bt[2].addActionListener(new ActionListener() {
+                    public void actionPerformed(ActionEvent e) {
+                        int numeroButao = 2;
+                        if (validarXeY[2] == 0) {
+                            escreverX_Y(numeroButao);
+                            validarXeY[2] = 1;
+                            verificarGanhadores();
+                        }
+                    }
+                });
+                bt[3].addActionListener(new ActionListener() {
+                    public void actionPerformed(ActionEvent e) {
+                        int numeroButao = 3;
+                        if (validarXeY[3] == 0) {
+                            escreverX_Y(numeroButao);
+                            validarXeY[3] = 1;
+                            verificarGanhadores();
+                        }
+                    }
+                });
+                bt[4].addActionListener(new ActionListener() {
+                    public void actionPerformed(ActionEvent e) {
+                        int numeroButao = 4;
+                        if (validarXeY[4] == 0) {
+                            escreverX_Y(numeroButao);
+                            validarXeY[4] = 1;
+                            verificarGanhadores();
+                        }
+                    }
+                });
+                bt[5].addActionListener(new ActionListener() {
+                    public void actionPerformed(ActionEvent e) {
+                        int numeroButao = 5;
+                        if (validarXeY[5] == 0) {
+                            escreverX_Y(numeroButao);
+                            validarXeY[5] = 1;
+                            verificarGanhadores();
+                        }
+                    }
+                });
+                bt[6].addActionListener(new ActionListener() {
+                    public void actionPerformed(ActionEvent e) {
+                        int numeroButao = 6;
+                        if (validarXeY[6] == 0) {
+                            escreverX_Y(numeroButao);
+                            validarXeY[6] = 1;
+                            verificarGanhadores();
+                        }
+                    }
+                });
+                bt[7].addActionListener(new ActionListener() {
+                    public void actionPerformed(ActionEvent e) {
+                        int numeroButao = 7;
+                        if (validarXeY[7] == 0) {
+                            escreverX_Y(numeroButao);
+                            validarXeY[7] = 1;
+                            verificarGanhadores();
+                        }
+                    }
+                });
+                bt[8].addActionListener(new ActionListener() {
+                    public void actionPerformed(ActionEvent e) {
+                        int numeroButao = 8;
+                        if (validarXeY[8] == 0) {
+                            escreverX_Y(numeroButao);
+                            validarXeY[8] = 1;
+                            verificarGanhadores();
+                        }
+                    }
+                });
+
             }
-        });
-        bt[1].addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                int numeroButao = 1;
-                if (validarXeY[1] == 0) {
-                    escreverX_Y(numeroButao);
-                    validarXeY[1] = 1;
-                    verificarGanhadores();
-                }
-            }
-        });
-        bt[2].addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                int numeroButao = 2;
-                if (validarXeY[2] == 0) {
-                    escreverX_Y(numeroButao);
-                    validarXeY[2] = 1;
-                    verificarGanhadores();
-                }
-            }
-        });
-        bt[3].addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                int numeroButao = 3;
-                if (validarXeY[3] == 0) {
-                    escreverX_Y(numeroButao);
-                    validarXeY[3] = 1;
-                    verificarGanhadores();
-                }
-            }
-        });
-        bt[4].addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                int numeroButao = 4;
-                if (validarXeY[4] == 0) {
-                    escreverX_Y(numeroButao);
-                    validarXeY[4] = 1;
-                    verificarGanhadores();
-                }
-            }
-        });
-        bt[5].addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                int numeroButao = 5;
-                if (validarXeY[5] == 0) {
-                    escreverX_Y(numeroButao);
-                    validarXeY[5] = 1;
-                    verificarGanhadores();
-                }
-            }
-        });
-        bt[6].addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                int numeroButao = 6;
-                if (validarXeY[6] == 0) {
-                    escreverX_Y(numeroButao);
-                    validarXeY[6] = 1;
-                    verificarGanhadores();
-                }
-            }
-        });
-        bt[7].addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                int numeroButao = 7;
-                if (validarXeY[7] == 0) {
-                    escreverX_Y(numeroButao);
-                    validarXeY[7] = 1;
-                    verificarGanhadores();
-                }
-            }
-        });
-        bt[8].addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                int numeroButao = 8;
-                if (validarXeY[8] == 0) {
-                    escreverX_Y(numeroButao);
-                    validarXeY[8] = 1;
-                    verificarGanhadores();
+
+            private void escreverX_Y(int numeroButao) {
+                if (contadorX_Y == 1) {
+                    bt[numeroButao].setText("X");
+                    contadorX_Y = 0;
+                } else {
+                    bt[numeroButao].setText("O");
+                    contadorX_Y = 1;
                 }
             }
         });
 
-    }
+        playerVsbot.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                playerVsbot.setVisible(false);
+                playerVSplayer.setVisible(false);
+                getContentPane().removeAll();
 
-    private void escreverX_Y(int numeroButao) {
-        if (contadorX_Y == 1) {
-            bt[numeroButao].setText("X");
-            contadorX_Y = 0;
-        } else {
-            bt[numeroButao].setText("O");
-            contadorX_Y = 1;
-        }
+                voltarMenu.setFont(new Font("Calibri", Font.PLAIN, 10));
+                add(voltarMenu);
+                voltarMenu.setText("Voltar ao menu");
+                voltarMenu.setBounds((0), (0), 100, 30);
+                voltarMenu.setVisible(true);
+
+                int butoes = 0;
+                for (int i = 0; i < 3; i++) {
+                    for (int j = 0; j < 3; j++) {
+                        bt[butoes] = new JButton();
+                        bt[butoes].setFont(new Font("Arial", Font.PLAIN, 50));
+                        add(bt[butoes]);
+                        bt[butoes].setBounds((100 * i) + 50, (100 * j) + 50, 95, 95);
+                        validarXeY[butoes] = 0;
+                        butoes++;
+                    }
+                }
+                bt[0].addActionListener(new ActionListener() {
+                    public void actionPerformed(ActionEvent e) {
+                        int numeroButao = 0;
+                        int butoesRestantes = 9;
+                        if (validarXeY[0] == 0) {
+                            for (int i = 0; i < 9; i++) {
+                                if (bt[i].getText() == "X" || bt[i].getText() == "O") {
+                                    butoesRestantes -= 1;
+                                } else {
+                                }
+                            }
+                            if (butoesRestantes <= 1) {
+                                escreverX_Y(numeroButao);
+                            } else {
+                                escreverX_Y(numeroButao);
+                                escreverX_Y(numeroButao);
+                            }
+                            verificarGanhadores();
+                        }
+                    }
+                });
+                bt[1].addActionListener(new ActionListener() {
+                    public void actionPerformed(ActionEvent e) {
+                        int numeroButao = 1;
+                        int butoesRestantes = 9;
+                        if (validarXeY[1] == 0) {
+                            for (int i = 0; i < 9; i++) {
+                                if (bt[i].getText() == "X" || bt[i].getText() == "O") {
+                                    butoesRestantes -= 1;
+                                } else {
+                                }
+                            }
+                            if (butoesRestantes <= 1) {
+                                escreverX_Y(numeroButao);
+                            } else {
+                                escreverX_Y(numeroButao);
+                                escreverX_Y(numeroButao);
+                            }
+                            verificarGanhadores();
+                        }
+                    }
+                });
+                bt[2].addActionListener(new ActionListener() {
+                    public void actionPerformed(ActionEvent e) {
+                        int numeroButao = 2;
+                        int butoesRestantes = 9;
+                        if (validarXeY[2] == 0) {
+                            for (int i = 0; i < 9; i++) {
+                                if (bt[i].getText() == "X" || bt[i].getText() == "O") {
+                                    butoesRestantes -= 1;
+                                } else {
+                                }
+                            }
+                            if (butoesRestantes <= 1) {
+                                escreverX_Y(numeroButao);
+                            } else {
+                                escreverX_Y(numeroButao);
+                                escreverX_Y(numeroButao);
+                            }
+                            verificarGanhadores();
+                        }
+                    }
+                });
+                bt[3].addActionListener(new ActionListener() {
+                    public void actionPerformed(ActionEvent e) {
+                        int numeroButao = 3;
+                        int butoesRestantes = 9;
+                        if (validarXeY[3] == 0) {
+                            for (int i = 0; i < 9; i++) {
+                                if (bt[i].getText() == "X" || bt[i].getText() == "O") {
+                                    butoesRestantes -= 1;
+                                } else {
+                                }
+                            }
+                            if (butoesRestantes <= 1) {
+                                escreverX_Y(numeroButao);
+                            } else {
+                                escreverX_Y(numeroButao);
+                                escreverX_Y(numeroButao);
+                            }
+                            verificarGanhadores();
+                        }
+                    }
+                });
+                bt[4].addActionListener(new ActionListener() {
+                    public void actionPerformed(ActionEvent e) {
+                        int numeroButao = 4;
+                        int butoesRestantes = 9;
+                        if (validarXeY[4] == 0) {
+                            for (int i = 0; i < 9; i++) {
+                                if (bt[i].getText() == "X" || bt[i].getText() == "O") {
+                                    butoesRestantes -= 1;
+                                } else {
+                                }
+                            }
+                            if (butoesRestantes <= 1) {
+                                escreverX_Y(numeroButao);
+                            } else {
+                                escreverX_Y(numeroButao);
+                                escreverX_Y(numeroButao);
+                            }
+                            verificarGanhadores();
+                        }
+                    }
+                });
+                bt[5].addActionListener(new ActionListener() {
+                    public void actionPerformed(ActionEvent e) {
+                        int numeroButao = 5;
+                        int butoesRestantes = 9;
+                        if (validarXeY[5] == 0) {
+                            for (int i = 0; i < 9; i++) {
+                                if (bt[i].getText() == "X" || bt[i].getText() == "O") {
+                                    butoesRestantes -= 1;
+                                } else {
+                                }
+                            }
+                            if (butoesRestantes <= 1) {
+                                escreverX_Y(numeroButao);
+                            } else {
+                                escreverX_Y(numeroButao);
+                                escreverX_Y(numeroButao);
+                            }
+                            verificarGanhadores();
+                        }
+                    }
+                });
+                bt[6].addActionListener(new ActionListener() {
+                    public void actionPerformed(ActionEvent e) {
+                        int numeroButao = 6;
+                        int butoesRestantes = 9;
+                        if (validarXeY[6] == 0) {
+                            for (int i = 0; i < 9; i++) {
+                                if (bt[i].getText() == "X" || bt[i].getText() == "O") {
+                                    butoesRestantes -= 1;
+                                } else {
+                                }
+                            }
+                            if (butoesRestantes <= 1) {
+                                escreverX_Y(numeroButao);
+                            } else {
+                                escreverX_Y(numeroButao);
+                                escreverX_Y(numeroButao);
+                            }
+                            verificarGanhadores();
+                        }
+                    }
+                });
+                bt[7].addActionListener(new ActionListener() {
+                    public void actionPerformed(ActionEvent e) {
+                        int numeroButao = 7;
+                        int butoesRestantes = 9;
+                        if (validarXeY[7] == 0) {
+                            for (int i = 0; i < 9; i++) {
+                                if (bt[i].getText() == "X" || bt[i].getText() == "O") {
+                                    butoesRestantes -= 1;
+                                } else {
+                                }
+                            }
+                            if (butoesRestantes <= 1) {
+                                escreverX_Y(numeroButao);
+                            } else {
+                                escreverX_Y(numeroButao);
+                                escreverX_Y(numeroButao);
+                            }
+                            verificarGanhadores();
+                        }
+                    }
+                });
+                bt[8].addActionListener(new ActionListener() {
+                    public void actionPerformed(ActionEvent e) {
+                        int numeroButao = 8;
+                        int butoesRestantes = 9;
+                        if (validarXeY[8] == 0) {
+                            for (int i = 0; i < 9; i++) {
+                                if (bt[i].getText() == "X" || bt[i].getText() == "O") {
+                                    butoesRestantes -= 1;
+                                } else {
+                                }
+                            }
+                            if (butoesRestantes <= 1) {
+                                escreverX_Y(numeroButao);
+                            } else {
+                                escreverX_Y(numeroButao);
+                                escreverX_Y(numeroButao);
+                            }
+                            verificarGanhadores();
+                        }
+                    }
+                });
+
+            }
+
+            private void escreverX_Y(int numeroButao) {
+                Random rand = new Random();
+                int random = 0;
+
+                if (contadorX_Y == 1) {
+                    bt[numeroButao].setText("X");
+                    contadorX_Y = 0;
+                    validarXeY[numeroButao] = 1;
+                } else {
+                    int acharButao = 0;
+                    while (acharButao == 0) {
+                        random = rand.nextInt(9);
+                        if (bt[random].getText() != "X" & bt[random].getText() != "O") {
+                            acharButao = 1;
+                        }
+                    }
+                    validarXeY[random] = 1;
+                    bt[random].setText("O");
+                    contadorX_Y = 1;
+                }
+            }
+        });
+
+        voltarMenu.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                limparButoes();
+                for (int i = 0; i < 9; i++) {
+                    bt[i].setVisible(false);
+                    remove(bt[i]);
+                }
+                voltarMenu.setVisible(false);
+                remove(voltarMenu);
+
+                playerVSplayer.setFont(new Font("Arial", Font.PLAIN, 15));
+                add(playerVSplayer);
+                playerVSplayer.setText("Player vs Player");
+                playerVSplayer.setVisible(true);
+
+                playerVsbot.setFont(new Font("Arial", Font.PLAIN, 15));
+                add(playerVsbot);
+                playerVsbot.setText("Player vs bot");
+                playerVsbot.setVisible(true);
+
+                playerVSplayer.setBounds((20), (100), 150, 50);
+                playerVsbot.setBounds((215), (100), 150, 50);
+            }
+        });
     }
 
     private void verificarGanhadores() {
         //Linhas horizontais na verificacao do X
         if (bt[0].getText().equals("X") && bt[3].getText().equals("X") && bt[6].getText().equals("X")) {
             JOptionPane.showMessageDialog(null, "Parabéns ao Jogador X por vencer!", "Resultado Jogo", JOptionPane.INFORMATION_MESSAGE);
-            encontrarEmpate = -1;
             limparButoes();
+            encontrarEmpate -= 1;
         }
         if (bt[1].getText().equals("X") && bt[4].getText().equals("X") && bt[7].getText().equals("X")) {
             JOptionPane.showMessageDialog(null, "Parabéns ao Jogador X por vencer!", "Resultado Jogo", JOptionPane.INFORMATION_MESSAGE);
-            encontrarEmpate = -1;
             limparButoes();
+            encontrarEmpate -= 1;
         }
         if (bt[2].getText().equals("X") && bt[5].getText().equals("X") && bt[8].getText().equals("X")) {
             JOptionPane.showMessageDialog(null, "Parabéns ao Jogador X por vencer!", "Resultado Jogo", JOptionPane.INFORMATION_MESSAGE);
-            encontrarEmpate = -1;
             limparButoes();
+            encontrarEmpate -= 1;
         }
 
         //Linhas verticais na verificacao do X
         if (bt[0].getText().equals("X") && bt[1].getText().equals("X") && bt[2].getText().equals("X")) {
             JOptionPane.showMessageDialog(null, "Parabéns ao Jogador X por vencer!", "Resultado Jogo", JOptionPane.INFORMATION_MESSAGE);
-            encontrarEmpate = -1;
             limparButoes();
+            encontrarEmpate -= 1;
         }
         if (bt[3].getText().equals("X") && bt[4].getText().equals("X") && bt[5].getText().equals("X")) {
             JOptionPane.showMessageDialog(null, "Parabéns ao Jogador X por vencer!", "Resultado Jogo", JOptionPane.INFORMATION_MESSAGE);
-            encontrarEmpate = -1;
             limparButoes();
+            encontrarEmpate -= 1;
         }
         if (bt[6].getText().equals("X") && bt[7].getText().equals("X") && bt[8].getText().equals("X")) {
             JOptionPane.showMessageDialog(null, "Parabéns ao Jogador X por vencer!", "Resultado Jogo", JOptionPane.INFORMATION_MESSAGE);
-            encontrarEmpate = -1;
             limparButoes();
+            encontrarEmpate -= 1;
         }
 
         //Linhas horizontais na verificacao do O
         if (bt[0].getText().equals("O") && bt[3].getText().equals("O") && bt[6].getText().equals("O")) {
             JOptionPane.showMessageDialog(null, "Parabéns ao Jogador O por vencer!", "Resultado Jogo", JOptionPane.INFORMATION_MESSAGE);
-            encontrarEmpate = -1;
             limparButoes();
+            encontrarEmpate -= 1;
         }
         if (bt[1].getText().equals("O") && bt[4].getText().equals("O") && bt[7].getText().equals("O")) {
             JOptionPane.showMessageDialog(null, "Parabéns ao Jogador O por vencer!", "Resultado Jogo", JOptionPane.INFORMATION_MESSAGE);
-            encontrarEmpate = -1;
             limparButoes();
+            encontrarEmpate -= 1;
         }
         if (bt[2].getText().equals("O") && bt[5].getText().equals("O") && bt[8].getText().equals("O")) {
             JOptionPane.showMessageDialog(null, "Parabéns ao Jogador O por vencer!", "Resultado Jogo", JOptionPane.INFORMATION_MESSAGE);
-            encontrarEmpate = -1;
             limparButoes();
+            encontrarEmpate -= 1;
         }
 
         //Linhas verticais na verificacao do O
         if (bt[0].getText().equals("O") && bt[1].getText().equals("O") && bt[2].getText().equals("O")) {
             JOptionPane.showMessageDialog(null, "Parabéns ao Jogador O por vencer!", "Resultado Jogo", JOptionPane.INFORMATION_MESSAGE);
-            encontrarEmpate = -1;
             limparButoes();
+            encontrarEmpate -= 1;
         }
         if (bt[3].getText().equals("O") && bt[4].getText().equals("O") && bt[5].getText().equals("O")) {
             JOptionPane.showMessageDialog(null, "Parabéns ao Jogador O por vencer!", "Resultado Jogo", JOptionPane.INFORMATION_MESSAGE);
-            encontrarEmpate = -1;
             limparButoes();
+            encontrarEmpate -= 1;
         }
         if (bt[6].getText().equals("O") && bt[7].getText().equals("O") && bt[8].getText().equals("O")) {
             JOptionPane.showMessageDialog(null, "Parabéns ao Jogador O por vencer!", "Resultado Jogo", JOptionPane.INFORMATION_MESSAGE);
-            encontrarEmpate = -1;
             limparButoes();
+            encontrarEmpate -= 1;
         }
 
         //Linhas diagonais na verificacao do X
         if (bt[0].getText().equals("X") && bt[4].getText().equals("X") && bt[8].getText().equals("X")) {
             JOptionPane.showMessageDialog(null, "Parabéns ao Jogador X por vencer!", "Resultado Jogo", JOptionPane.INFORMATION_MESSAGE);
-            encontrarEmpate = -1;
             limparButoes();
+            encontrarEmpate -= 1;
         }
         if (bt[2].getText().equals("X") && bt[4].getText().equals("X") && bt[6].getText().equals("X")) {
             JOptionPane.showMessageDialog(null, "Parabéns ao Jogador X por vencer!", "Resultado Jogo", JOptionPane.INFORMATION_MESSAGE);
-            encontrarEmpate = -1;
             limparButoes();
+            encontrarEmpate -= 1;
         }
 
         //Linhas diagonais na verificacao do O
         if (bt[0].getText().equals("O") && bt[4].getText().equals("O") && bt[8].getText().equals("O")) {
             JOptionPane.showMessageDialog(null, "Parabéns ao Jogador O por vencer!", "Resultado Jogo", JOptionPane.INFORMATION_MESSAGE);
-            encontrarEmpate = -1;
             limparButoes();
+            encontrarEmpate -= 1;
         }
         if (bt[2].getText().equals("O") && bt[4].getText().equals("O") && bt[6].getText().equals("O")) {
             JOptionPane.showMessageDialog(null, "Parabéns ao Jogador O por vencer!", "Resultado Jogo", JOptionPane.INFORMATION_MESSAGE);
-            encontrarEmpate = -1;
             limparButoes();
+            encontrarEmpate -= 1;
         }
 
-        if (encontrarEmpate == 8) {
+        if (encontrarEmpate == 4) {
             JOptionPane.showMessageDialog(null, "Ups, parece que ouve um empate!", "Resultado Jogo", JOptionPane.INFORMATION_MESSAGE);
-            encontrarEmpate = 0;
             limparButoes();
+            encontrarEmpate = 0;
         } else {
             encontrarEmpate += 1;
         }
@@ -264,7 +558,7 @@ public class JogoGalo extends JFrame {
         validarXeY[8] = 0;
 
         contadorX_Y = 1;
-
+        encontrarEmpate = 0;
     }
 
     public static void main(String[] args) {
