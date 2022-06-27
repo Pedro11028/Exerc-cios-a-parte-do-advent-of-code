@@ -210,6 +210,7 @@ public class JogoGalo extends JFrame {
             limparButoes();
         }
 
+        //Linhas diagonais na verificacao do X
         if (bt[0].getText().equals("X") && bt[4].getText().equals("X") && bt[8].getText().equals("X")) {
             JOptionPane.showMessageDialog(null, "Parabéns ao Jogador X por vencer!", "Resultado Jogo", JOptionPane.INFORMATION_MESSAGE);
             encontrarEmpate = -1;
@@ -221,6 +222,7 @@ public class JogoGalo extends JFrame {
             limparButoes();
         }
 
+        //Linhas diagonais na verificacao do O
         if (bt[0].getText().equals("O") && bt[4].getText().equals("O") && bt[8].getText().equals("O")) {
             JOptionPane.showMessageDialog(null, "Parabéns ao Jogador O por vencer!", "Resultado Jogo", JOptionPane.INFORMATION_MESSAGE);
             encontrarEmpate = -1;
