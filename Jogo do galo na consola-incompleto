@@ -1,0 +1,233 @@
+package com.mycompany.linhacomandosjogogalo;
+
+import java.util.Arrays;
+import java.util.Scanner;
+
+public class LinhaComandosJogoGalo {
+
+    public static void main(String[] args) {
+        String[][] posicaoX_Y = new String[3][3];
+        int[] verificarX_Y = new int[9];
+        int cont = 0;
+        for (int i = 0; i < posicaoX_Y.length; i++) {
+            for (int j = 0; j < posicaoX_Y[i].length; j++) {
+                posicaoX_Y[i][j] = Integer.toString(cont);
+                cont += 1;
+            }
+        }
+
+        for (int i = 0; i < 3; i++) {
+            System.out.println(Arrays.toString(posicaoX_Y[i]));
+        }
+
+        for (int i = 0; i < posicaoX_Y.length; i++) {
+            for (int j = 0; j < posicaoX_Y[i].length; j++) {
+                posicaoX_Y[i][j] = " ";
+            }
+        }
+
+        System.out.println("-------------");
+        int jogar = 0;
+
+        while (jogar >= 0) {
+
+            Scanner Jogadas = new Scanner(System.in);
+            System.out.print("player X em que posição deseja jogar? ");
+            int JogadaX = Jogadas.nextInt();
+            int JogadaO = -1;
+            EscreverJogada(posicaoX_Y, verificarX_Y, JogadaX, JogadaO);
+            
+            for (int i = 0; i < posicaoX_Y.length; i++) {
+                for (int j = 0; j < posicaoX_Y[i].length; j++) {
+                    if (posicaoX_Y[i][j] != " ") {
+                        jogar += 1;
+                    }
+                }
+            }
+            if (jogar == 9) {
+                break;
+            } else {
+                jogar = 0;
+            }
+            
+            System.out.print("player O em que posição deseja jogar? ");
+            JogadaO = Jogadas.nextInt();
+            EscreverJogada(posicaoX_Y, verificarX_Y, JogadaX, JogadaO);
+        }
+    }
+
+    private static void EscreverJogada(String[][] posicaoX_Y, int[] verificarX_Y, int JogadaX, int JogadaO) {
+        switch (JogadaX) {
+            case 0:
+                if (verificarX_Y[0] == 0) {
+                    verificarX_Y[0] = 1;
+                    posicaoX_Y[0][0] = "X";
+                    for (int i = 0; i < 3; i++) {
+                        System.out.println(Arrays.toString(posicaoX_Y[i]));
+                    }
+                }
+                break;
+            case 1:
+                if (verificarX_Y[1] == 0) {
+                    verificarX_Y[1] = 1;
+                    posicaoX_Y[0][1] = "X";
+                    for (int i = 0; i < 3; i++) {
+                        System.out.println(Arrays.toString(posicaoX_Y[i]));
+                    }
+                }
+                break;
+            case 2:
+                if (verificarX_Y[2] == 0) {
+                    verificarX_Y[2] = 1;
+                    posicaoX_Y[0][2] = "X";
+                    for (int i = 0; i < 3; i++) {
+                        System.out.println(Arrays.toString(posicaoX_Y[i]));
+                    }
+                }
+                break;
+            case 3:
+                if (verificarX_Y[3] == 0) {
+                    verificarX_Y[3] = 1;
+                    posicaoX_Y[1][0] = "X";
+                    for (int i = 0; i < 3; i++) {
+                        System.out.println(Arrays.toString(posicaoX_Y[i]));
+                    }
+                }
+                break;
+            case 4:
+                if (verificarX_Y[4] == 0) {
+                    verificarX_Y[4] = 1;
+                    posicaoX_Y[1][1] = "X";
+                    for (int i = 0; i < 3; i++) {
+                        System.out.println(Arrays.toString(posicaoX_Y[i]));
+                    }
+                }
+                break;
+            case 5:
+                if (verificarX_Y[5] == 0) {
+                    verificarX_Y[5] = 1;
+                    posicaoX_Y[1][2] = "X";
+                    for (int i = 0; i < 3; i++) {
+                        System.out.println(Arrays.toString(posicaoX_Y[i]));
+                    }
+                }
+                break;
+            case 6:
+                if (verificarX_Y[6] == 0) {
+                    verificarX_Y[6] = 1;
+                    posicaoX_Y[2][0] = "X";
+                    for (int i = 0; i < 3; i++) {
+                        System.out.println(Arrays.toString(posicaoX_Y[i]));
+                    }
+                }
+                break;
+            case 7:
+                if (verificarX_Y[7] == 0) {
+                    verificarX_Y[7] = 1;
+                    posicaoX_Y[2][1] = "X";
+                    for (int i = 0; i < 3; i++) {
+                        System.out.println(Arrays.toString(posicaoX_Y[i]));
+                    }
+                }
+                break;
+            case 8:
+                if (verificarX_Y[8] == 0) {
+                    verificarX_Y[8] = 1;
+                    posicaoX_Y[2][2] = "X";
+                    for (int i = 0; i < 3; i++) {
+                        System.out.println(Arrays.toString(posicaoX_Y[i]));
+                    }
+                }
+                break;
+            default:
+        }
+
+        switch (JogadaO) {
+            case 0:
+                if (verificarX_Y[0] == 0) {
+                    verificarX_Y[0] = 1;
+                    posicaoX_Y[0][0] = "O";
+                    for (int i = 0; i < 3; i++) {
+                        System.out.println(Arrays.toString(posicaoX_Y[i]));
+                    }
+                }
+                break;
+            case 1:
+                if (verificarX_Y[1] == 0) {
+                    verificarX_Y[1] = 1;
+                    posicaoX_Y[0][1] = "O";
+                    for (int i = 0; i < 3; i++) {
+                        System.out.println(Arrays.toString(posicaoX_Y[i]));
+                    }
+                }
+                break;
+            case 2:
+                if (verificarX_Y[2] == 0) {
+                    verificarX_Y[2] = 1;
+                    posicaoX_Y[0][2] = "O";
+                    for (int i = 0; i < 3; i++) {
+                        System.out.println(Arrays.toString(posicaoX_Y[i]));
+                    }
+                }
+                break;
+            case 3:
+                if (verificarX_Y[3] == 0) {
+                    verificarX_Y[3] = 1;
+                    posicaoX_Y[1][0] = "O";
+                    for (int i = 0; i < 3; i++) {
+                        System.out.println(Arrays.toString(posicaoX_Y[i]));
+                    }
+                }
+                break;
+            case 4:
+                if (verificarX_Y[4] == 0) {
+                    verificarX_Y[4] = 1;
+                    posicaoX_Y[1][1] = "O";
+                    for (int i = 0; i < 3; i++) {
+                        System.out.println(Arrays.toString(posicaoX_Y[i]));
+                    }
+                }
+                break;
+            case 5:
+                if (verificarX_Y[5] == 0) {
+                    verificarX_Y[5] = 1;
+                    posicaoX_Y[1][2] = "O";
+                    for (int i = 0; i < 3; i++) {
+                        System.out.println(Arrays.toString(posicaoX_Y[i]));
+                    }
+                }
+                break;
+            case 6:
+                if (verificarX_Y[6] == 0) {
+                    verificarX_Y[6] = 1;
+                    posicaoX_Y[2][0] = "O";
+                    for (int i = 0; i < 3; i++) {
+                        System.out.println(Arrays.toString(posicaoX_Y[i]));
+                    }
+                }
+                break;
+            case 7:
+                if (verificarX_Y[7] == 0) {
+                    verificarX_Y[7] = 1;
+                    posicaoX_Y[2][1] = "O";
+                    for (int i = 0; i < 3; i++) {
+                        System.out.println(Arrays.toString(posicaoX_Y[i]));
+                    }
+                }
+                break;
+            case 8:
+                if (verificarX_Y[8] == 0) {
+                    verificarX_Y[8] = 1;
+                    posicaoX_Y[2][2] = "O";
+                    for (int i = 0; i < 3; i++) {
+                        System.out.println(Arrays.toString(posicaoX_Y[i]));
+                    }
+                }
+                break;
+            default:
+
+        }
+
+    }
+
+}
