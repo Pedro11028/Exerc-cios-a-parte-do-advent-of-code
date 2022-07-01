@@ -1,0 +1,1156 @@
+package com.mycompany.jogogalo;
+
+import java.awt.Color;
+import java.awt.FlowLayout;
+import java.awt.Font;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import static java.lang.Double.min;
+import java.util.ArrayList;
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import javax.swing.JTextField;
+import java.util.Random;
+
+public class JogoGalo extends JFrame {
+
+    JButton playerVSplayer = new JButton();
+
+    JButton playerVsbot = new JButton();
+    JButton dificuldadeNormal = new JButton();
+    JButton dificuldadeDificil = new JButton();
+
+    JLabel pontosX = new JLabel("");
+    JLabel pontosO = new JLabel("");
+
+    JLabel contadorPontosX = new JLabel("");
+    JLabel contadorPontosO = new JLabel("");
+
+    int contadorX = 0;
+    int contadorO = 0;
+
+    JButton voltarMenu = new JButton();
+    JButton[] bt = new JButton[9];
+    int contadorX_Y = 1;
+    int[] validarXeY = new int[9];
+    int encontrarEmpate = 0;
+    int verificarEscolha = 0;
+
+    public JogoGalo() {
+        setVisible(true);
+        setTitle("Jogo do galo");
+        setDefaultCloseOperation(3);
+        setLayout(null);
+        setBounds(300, 200, 500, 500);
+
+        playerVSplayer.setFont(new Font("Arial", Font.PLAIN, 15));
+        add(playerVSplayer);
+        playerVSplayer.setText("Player vs Player");
+
+        playerVsbot.setFont(new Font("Arial", Font.PLAIN, 15));
+        add(playerVsbot);
+        playerVsbot.setText("Player vs bot");
+
+        playerVSplayer.setBounds((20), (150), 200, 100);
+        playerVsbot.setBounds((250), (150), 200, 100);
+
+        voltarMenu.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                limparButoes();
+                for (int i = 0; i < 9; i++) {
+                    bt[i].setVisible(false);
+                    remove(bt[i]);
+                }
+                contadorPontosX.setVisible(false);
+                remove(contadorPontosX);
+
+                contadorPontosO.setVisible(false);
+                remove(contadorPontosO);
+
+                pontosX.setVisible(false);
+                remove(pontosX);
+                contadorX = 0;
+
+                pontosO.setVisible(false);
+                remove(pontosO);
+                contadorO = 0;
+
+                playerVsbot.setFont(new Font("Arial", Font.PLAIN, 15));
+                add(playerVsbot);
+                playerVsbot.setText("Player vs bot");
+                playerVsbot.setVisible(true);
+
+                playerVSplayer.setFont(new Font("Arial", Font.PLAIN, 15));
+                add(playerVSplayer);
+                playerVSplayer.setText("Player vs Player");
+                playerVSplayer.setVisible(true);
+
+                playerVSplayer.setBounds((20), (150), 200, 100);
+                playerVsbot.setBounds((250), (150), 200, 100);
+
+                voltarMenu.setVisible(false);
+                remove(voltarMenu);
+            }
+        });
+
+        playerVSplayer.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                playerVsbot.setVisible(false);
+                playerVSplayer.setVisible(false);
+                getContentPane().removeAll();
+
+                pontosX.setFont(new Font("Calibri", Font.PLAIN, 15));
+                pontosX.setText("Pontos Player: ");
+                add(pontosX);
+                pontosX.setBounds((0), (0), 100, 30);
+                pontosX.setVisible(true);
+
+                pontosO.setFont(new Font("Calibri", Font.PLAIN, 15));
+                pontosO.setText("Pontos Bot: ");
+                add(pontosO);
+                pontosO.setBounds((0), (20), 100, 30);
+                pontosO.setVisible(true);
+
+                contadorPontosX.setFont(new Font("Calibri", Font.PLAIN, 15));
+                contadorPontosX.setText("0");
+                add(contadorPontosX);
+                contadorPontosX.setBounds((95), (0), 100, 30);
+                contadorPontosX.setVisible(true);
+
+                contadorPontosO.setFont(new Font("Calibri", Font.PLAIN, 15));
+                contadorPontosO.setText("0");
+                add(contadorPontosO);
+                contadorPontosO.setBounds((75), (20), 100, 30);
+                contadorPontosO.setVisible(true);
+
+                voltarMenu.setFont(new Font("Calibri", Font.PLAIN, 10));
+                add(voltarMenu);
+                voltarMenu.setText("Voltar ao menu");
+                voltarMenu.setBounds((0), (50), 100, 30);
+                voltarMenu.setVisible(true);
+
+                int butoes = 0;
+                for (int i = 0; i < 3; i++) {
+                    for (int j = 0; j < 3; j++) {
+                        bt[butoes] = new JButton();
+                        bt[butoes].setFont(new Font("Arial", Font.PLAIN, 50));
+                        add(bt[butoes]);
+                        bt[butoes].setBounds((100 * i) + 100, (100 * j) + 100, 95, 95);
+                        validarXeY[butoes] = 0;
+                        butoes++;
+                    }
+                }
+                bt[0].addActionListener(new ActionListener() {
+                    public void actionPerformed(ActionEvent e) {
+                        jogarPlayer(0);
+                    }
+                });
+                bt[1].addActionListener(new ActionListener() {
+                    public void actionPerformed(ActionEvent e) {
+                        jogarPlayer(1);
+                    }
+                });
+                bt[2].addActionListener(new ActionListener() {
+                    public void actionPerformed(ActionEvent e) {
+                        jogarPlayer(2);
+                    }
+                });
+                bt[3].addActionListener(new ActionListener() {
+                    public void actionPerformed(ActionEvent e) {
+                        jogarPlayer(3);
+                    }
+                });
+                bt[4].addActionListener(new ActionListener() {
+                    public void actionPerformed(ActionEvent e) {
+                        jogarPlayer(4);
+                    }
+                });
+                bt[5].addActionListener(new ActionListener() {
+                    public void actionPerformed(ActionEvent e) {
+                        jogarPlayer(5);
+                    }
+                });
+                bt[6].addActionListener(new ActionListener() {
+                    public void actionPerformed(ActionEvent e) {
+                        jogarPlayer(6);
+                    }
+                });
+                bt[7].addActionListener(new ActionListener() {
+                    public void actionPerformed(ActionEvent e) {
+                        jogarPlayer(7);
+                    }
+                });
+                bt[8].addActionListener(new ActionListener() {
+                    public void actionPerformed(ActionEvent e) {
+                        jogarPlayer(8);
+                    }
+                });
+
+            }
+
+            private void jogarPlayer(int numeroButao) {
+                if (validarXeY[numeroButao] == 0) {
+                    escreverX_Y(numeroButao);
+                    validarXeY[numeroButao] = 1;
+                    verificarGanhadores(8);
+                }
+            }
+
+            private void escreverX_Y(int numeroButao) {
+                if (contadorX_Y == 1) {
+                    bt[numeroButao].setText("X");
+                    contadorX_Y = 0;
+                } else {
+                    bt[numeroButao].setText("O");
+                    contadorX_Y = 1;
+                }
+            }
+        });
+
+        playerVsbot.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                playerVsbot.setVisible(false);
+                playerVSplayer.setVisible(false);
+                getContentPane().removeAll();
+
+                dificuldadeNormal.setFont(new Font("Calibri", Font.PLAIN, 15));
+                add(dificuldadeNormal);
+                dificuldadeNormal.setText("Dificuldade normal");
+
+                dificuldadeDificil.setFont(new Font("Calibri", Font.PLAIN, 15));
+                add(dificuldadeDificil);
+                dificuldadeDificil.setText("Dificuldade difícil");
+
+                dificuldadeNormal.setBounds((20), (150), 200, 100);
+                dificuldadeNormal.setVisible(true);
+                dificuldadeDificil.setBounds((250), (150), 200, 100);
+                dificuldadeDificil.setVisible(true);
+
+            }
+        });
+
+        dificuldadeNormal.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                dificuldadeNormal.setVisible(false);
+                dificuldadeDificil.setVisible(false);
+                getContentPane().removeAll();
+
+                pontosX.setFont(new Font("Calibri", Font.PLAIN, 15));
+                pontosX.setText("Pontos Player: ");
+                add(pontosX);
+                pontosX.setBounds((0), (0), 100, 30);
+                pontosX.setVisible(true);
+
+                pontosO.setFont(new Font("Calibri", Font.PLAIN, 15));
+                pontosO.setText("Pontos Bot: ");
+                add(pontosO);
+                pontosO.setBounds((0), (20), 100, 30);
+                pontosO.setVisible(true);
+
+                contadorPontosX.setFont(new Font("Calibri", Font.PLAIN, 15));
+                contadorPontosX.setText("0");
+                add(contadorPontosX);
+                contadorPontosX.setBounds((95), (0), 100, 30);
+                contadorPontosX.setVisible(true);
+
+                contadorPontosO.setFont(new Font("Calibri", Font.PLAIN, 15));
+                contadorPontosO.setText("0");
+                add(contadorPontosO);
+                contadorPontosO.setBounds((75), (20), 100, 30);
+                contadorPontosO.setVisible(true);
+
+                voltarMenu.setFont(new Font("Calibri", Font.PLAIN, 10));
+                add(voltarMenu);
+                voltarMenu.setText("Voltar ao menu");
+                voltarMenu.setBounds((0), (50), 100, 30);
+                voltarMenu.setVisible(true);
+
+                int butoes = 0;
+                for (int i = 0; i < 3; i++) {
+                    for (int j = 0; j < 3; j++) {
+                        bt[butoes] = new JButton();
+                        bt[butoes].setFont(new Font("Arial", Font.PLAIN, 50));
+                        add(bt[butoes]);
+                        bt[butoes].setBounds((100 * i) + 100, (100 * j) + 100, 95, 95);
+                        validarXeY[butoes] = 0;
+                        butoes++;
+                    }
+                }
+                bt[0].addActionListener(new ActionListener() {
+                    public void actionPerformed(ActionEvent e) {
+                        jogarComBot(0);
+                    }
+                });
+                bt[1].addActionListener(new ActionListener() {
+                    public void actionPerformed(ActionEvent e) {
+                        jogarComBot(1);
+                    }
+                });
+                bt[2].addActionListener(new ActionListener() {
+                    public void actionPerformed(ActionEvent e) {
+                        jogarComBot(2);
+                    }
+                });
+                bt[3].addActionListener(new ActionListener() {
+                    public void actionPerformed(ActionEvent e) {
+                        jogarComBot(3);
+                    }
+                });
+                bt[4].addActionListener(new ActionListener() {
+                    public void actionPerformed(ActionEvent e) {
+                        jogarComBot(4);
+                    }
+                });
+                bt[5].addActionListener(new ActionListener() {
+                    public void actionPerformed(ActionEvent e) {
+                        jogarComBot(5);
+                    }
+                });
+                bt[6].addActionListener(new ActionListener() {
+                    public void actionPerformed(ActionEvent e) {
+                        jogarComBot(6);
+                    }
+                });
+                bt[7].addActionListener(new ActionListener() {
+                    public void actionPerformed(ActionEvent e) {
+                        jogarComBot(7);
+                    }
+                });
+                bt[8].addActionListener(new ActionListener() {
+                    public void actionPerformed(ActionEvent e) {
+                        jogarComBot(8);
+                    }
+                });
+
+            }
+
+            private void jogarComBot(int numButao) {
+                int butoesRestantes = 9;
+                if (validarXeY[numButao] == 0) {
+                    for (int i = 0; i < 9; i++) {
+                        if (bt[i].getText() == "X" || bt[i].getText() == "O") {
+                            butoesRestantes -= 1;
+                        } else {
+                        }
+                    }
+                    if (butoesRestantes <= 1) {
+                        escreverX_Y(numButao);
+                    } else {
+                        escreverX_Y(numButao);
+                        escreverX_Y(numButao);
+                    }
+                    verificarGanhadores(4);
+
+                    contadorPontosX.setText(String.valueOf(contadorX));
+
+                    contadorPontosO.setText(String.valueOf(contadorO));
+                }
+            }
+
+            private void escreverX_Y(int numeroButao) {
+                Random rand = new Random();
+                int random = 0;
+
+                if (contadorX_Y == 1) {
+                    bt[numeroButao].setText("X");
+                    contadorX_Y = 0;
+                    validarXeY[numeroButao] = 1;
+                } else {
+                    int acharButao = 0;
+                    while (acharButao == 0) {
+                        random = rand.nextInt(9);
+                        if (bt[random].getText() != "X" & bt[random].getText() != "O") {
+                            acharButao = 1;
+                        }
+                    }
+                    validarXeY[random] = 1;
+                    bt[random].setText("O");
+                    contadorX_Y = 1;
+                }
+            }
+
+        });
+
+        dificuldadeDificil.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                dificuldadeNormal.setVisible(false);
+                dificuldadeDificil.setVisible(false);
+                getContentPane().removeAll();
+
+                pontosX.setFont(new Font("Calibri", Font.PLAIN, 15));
+                pontosX.setText("Pontos Player: ");
+                add(pontosX);
+                pontosX.setBounds((0), (0), 100, 30);
+                pontosX.setVisible(true);
+
+                pontosO.setFont(new Font("Calibri", Font.PLAIN, 15));
+                pontosO.setText("Pontos Bot: ");
+                add(pontosO);
+                pontosO.setBounds((0), (20), 100, 30);
+                pontosO.setVisible(true);
+
+                contadorPontosX.setFont(new Font("Calibri", Font.PLAIN, 15));
+                contadorPontosX.setText("0");
+                add(contadorPontosX);
+                contadorPontosX.setBounds((95), (0), 100, 30);
+                contadorPontosX.setVisible(true);
+
+                contadorPontosO.setFont(new Font("Calibri", Font.PLAIN, 15));
+                contadorPontosO.setText("0");
+                add(contadorPontosO);
+                contadorPontosO.setBounds((75), (20), 100, 30);
+                contadorPontosO.setVisible(true);
+
+                voltarMenu.setFont(new Font("Calibri", Font.PLAIN, 10));
+                add(voltarMenu);
+                voltarMenu.setText("Voltar ao menu");
+                voltarMenu.setBounds((0), (50), 100, 30);
+                voltarMenu.setVisible(true);
+
+                int butoes = 0;
+                for (int i = 0; i < 3; i++) {
+                    for (int j = 0; j < 3; j++) {
+                        bt[butoes] = new JButton();
+                        bt[butoes].setFont(new Font("Arial", Font.PLAIN, 50));
+                        add(bt[butoes]);
+                        bt[butoes].setBounds((100 * i) + 100, (100 * j) + 100, 95, 95);
+                        validarXeY[butoes] = 0;
+                        butoes++;
+                    }
+                }
+                bt[0].addActionListener(new ActionListener() {
+                    public void actionPerformed(ActionEvent e) {
+                        jogarComBot(0);
+                    }
+                });
+                bt[1].addActionListener(new ActionListener() {
+                    public void actionPerformed(ActionEvent e) {
+                        jogarComBot(1);
+                    }
+                });
+                bt[2].addActionListener(new ActionListener() {
+                    public void actionPerformed(ActionEvent e) {
+                        jogarComBot(2);
+                    }
+                });
+                bt[3].addActionListener(new ActionListener() {
+                    public void actionPerformed(ActionEvent e) {
+                        jogarComBot(3);
+                    }
+                });
+                bt[4].addActionListener(new ActionListener() {
+                    public void actionPerformed(ActionEvent e) {
+                        jogarComBot(4);
+                    }
+                });
+                bt[5].addActionListener(new ActionListener() {
+                    public void actionPerformed(ActionEvent e) {
+                        jogarComBot(5);
+                    }
+                });
+                bt[6].addActionListener(new ActionListener() {
+                    public void actionPerformed(ActionEvent e) {
+                        jogarComBot(6);
+                    }
+                });
+                bt[7].addActionListener(new ActionListener() {
+                    public void actionPerformed(ActionEvent e) {
+                        jogarComBot(7);
+                    }
+                });
+                bt[8].addActionListener(new ActionListener() {
+                    public void actionPerformed(ActionEvent e) {
+                        jogarComBot(8);
+                    }
+                });
+            }
+
+            private void jogarComBot(int numButao) {
+                int butoesRestantes = 9;
+                if (validarXeY[numButao] == 0) {
+                    for (int i = 0; i < 9; i++) {
+                        if (bt[i].getText() == "X" || bt[i].getText() == "O") {
+                            butoesRestantes -= 1;
+                        } else {
+                        }
+                    }
+                    if (butoesRestantes <= 1) {
+                        escreverX_Y(numButao);
+                    } else {
+                        escreverX_Y(numButao);
+                        escreverX_Y(numButao);
+                    }
+                    verificarGanhadores(4);
+                }
+            }
+
+            private void escreverX_Y(int numeroButao) {
+
+                if (contadorX_Y == 1) {
+                    bt[numeroButao].setText("X");
+                    contadorX_Y = 0;
+                    validarXeY[numeroButao] = 1;
+                } else {
+                    jogadasBot(numeroButao);
+                }
+            }
+
+            private void jogadasBot(int numeroButao) {
+                Random rand = new Random();
+                int random = 0;
+                int proximaJogada = 0;
+                int flagJaJogou = 0;
+
+                int jaJogou=0;
+                
+                int acharButao = 0;
+                while (acharButao == 0) {
+                    random = rand.nextInt(9);
+                    proximaJogada = rand.nextInt(6);
+//Jogada Horixontal, quando o jogador poe o X atraz de outro X
+                    if (jaJogou==0 &  numeroButao < 3) {
+                        if (bt[numeroButao].getText() == "X" & bt[numeroButao + 3].getText() == "X") {
+                            if (proximaJogada <= 3) {
+                                if (bt[numeroButao + 6].getText() != "X" & bt[numeroButao + 6].getText() != "O") {
+                                    flagJaJogou = 1;
+                                    jaJogou=1;
+                                    bt[numeroButao + 6].setText("O");
+                                    contadorX_Y = 1;
+                                    validarXeY[numeroButao + 6] = 1;
+                                    acharButao = 1;
+                                } else if (bt[random].getText() != "X" & bt[random].getText() != "O") {
+                                    acharButao = 1;
+                                }
+                            } else if (bt[random].getText() != "X" & bt[random].getText() != "O") {
+                                acharButao = 1;
+                            }
+                        } else if (bt[random].getText() != "X" & bt[random].getText() != "O") {
+                            acharButao = 1;
+                        }
+                    } else if (numeroButao == 3 || numeroButao == 4 || numeroButao == 5) {
+                        if (bt[numeroButao].getText() == "X" & bt[numeroButao + 3].getText() == "X") {
+                            if (proximaJogada <= 3) {
+                                if (bt[numeroButao - 3].getText() != "X" & bt[numeroButao - 3].getText() != "O") {
+                                    flagJaJogou = 1;
+                                    jaJogou=1;
+                                    bt[numeroButao - 3].setText("O");
+                                    contadorX_Y = 1;
+                                    validarXeY[numeroButao - 3] = 1;
+                                    acharButao = 1;
+                                } else if (bt[random].getText() != "X" & bt[random].getText() != "O") {
+                                    acharButao = 1;
+                                }
+                            } else if (bt[random].getText() != "X" & bt[random].getText() != "O") {
+                                acharButao = 1;
+                            }
+                        } else if (bt[random].getText() != "X" & bt[random].getText() != "O") {
+                            acharButao = 1;
+                        }
+                    } else if (bt[random].getText() != "X" & bt[random].getText() != "O") {
+                        acharButao = 1;
+                    }
+//Jogada Horixontal, quando o jogador poe o X a frente de outro X
+                    if (jaJogou==0 & numeroButao > 5) {
+                        if (bt[numeroButao].getText() == "X" & bt[numeroButao - 3].getText() == "X") {
+                            if (proximaJogada <= 3) {
+                                if (bt[numeroButao - 6].getText() != "X" & bt[numeroButao - 6].getText() != "O") {
+                                    flagJaJogou = 1;
+                                    jaJogou=1;
+                                    bt[numeroButao - 6].setText("O");
+                                    contadorX_Y = 1;
+                                    validarXeY[numeroButao - 6] = 1;
+                                    acharButao = 1;
+                                } else if (bt[random].getText() != "X" & bt[random].getText() != "O") {
+                                    acharButao = 1;
+                                }
+                            } else if (bt[random].getText() != "X" & bt[random].getText() != "O") {
+                                acharButao = 1;
+                            }
+                        } else if (bt[random].getText() != "X" & bt[random].getText() != "O") {
+                            acharButao = 1;
+                        }
+                    } else if (numeroButao == 3 || numeroButao == 4 || numeroButao == 5) {
+                        if (bt[numeroButao].getText() == "X" & bt[numeroButao - 3].getText() == "X") {
+                            if (proximaJogada <= 3) {
+                                if (bt[numeroButao + 3].getText() != "X" & bt[numeroButao + 3].getText() != "O") {
+                                    flagJaJogou = 1;
+                                    jaJogou=1;
+                                    bt[numeroButao + 3].setText("O");
+                                    contadorX_Y = 1;
+                                    validarXeY[numeroButao + 3] = 1;
+                                    acharButao = 1;
+                                } else if (bt[random].getText() != "X" & bt[random].getText() != "O") {
+                                    acharButao = 1;
+                                }
+                            } else if (bt[random].getText() != "X" & bt[random].getText() != "O") {
+                                acharButao = 1;
+                            }
+                        } else if (bt[random].getText() != "X" & bt[random].getText() != "O") {
+                            acharButao = 1;
+                        }
+                    } else if (bt[random].getText() != "X" & bt[random].getText() != "O") {
+                        acharButao = 1;
+                    }
+//Jogada Horixontal, quando o jogador poe um X separado de outro X duas casas a frente
+                    if (jaJogou==0 & numeroButao < 3) {
+                        if ((bt[numeroButao].getText() == "X" & bt[numeroButao + 6].getText() == "X")) {
+                            if (proximaJogada <= 3) {
+                                if (bt[numeroButao + 3].getText() != "X" & bt[numeroButao + 3].getText() != "O") {
+                                    flagJaJogou = 1;
+                                    jaJogou=1;
+                                    bt[numeroButao + 3].setText("O");
+                                    contadorX_Y = 1;
+                                    validarXeY[numeroButao + 3] = 1;
+                                    acharButao = 1;
+                                } else if (bt[random].getText() != "X" & bt[random].getText() != "O") {
+                                    acharButao = 1;
+                                }
+                            } else if (bt[random].getText() != "X" & bt[random].getText() != "O") {
+                                acharButao = 1;
+                            }
+                        } else if (bt[random].getText() != "X" & bt[random].getText() != "O") {
+                            acharButao = 1;
+                        }
+                    } else if (bt[random].getText() != "X" & bt[random].getText() != "O") {
+                        acharButao = 1;
+                    }
+//Jogada Horixontal, quando o jogador poe um X separado de outro X duas casas atraz
+                    if (jaJogou==0 & numeroButao > 5) {
+                        if ((bt[numeroButao].getText() == "X" & bt[numeroButao - 6].getText() == "X")) {
+                            if (proximaJogada <= 3) {
+                                if (bt[numeroButao - 3].getText() != "X" & bt[numeroButao - 3].getText() != "O") {
+                                    flagJaJogou = 1;
+                                    jaJogou=1;
+                                    bt[numeroButao - 3].setText("O");
+                                    contadorX_Y = 1;
+                                    validarXeY[numeroButao - 3] = 1;
+                                    acharButao = 1;
+                                } else if (bt[random].getText() != "X" & bt[random].getText() != "O") {
+                                    acharButao = 1;
+                                }
+                            } else if (bt[random].getText() != "X" & bt[random].getText() != "O") {
+                                acharButao = 1;
+                            }
+                        } else if (bt[random].getText() != "X" & bt[random].getText() != "O") {
+                            acharButao = 1;
+                        }
+                    } else if (bt[random].getText() != "X" & bt[random].getText() != "O") {
+                        acharButao = 1;
+                    }
+
+//Jogada Vertical, quando o jogador poe o X embaixo de outro X
+                    if (jaJogou==0 & (numeroButao == 2 || numeroButao == 5 || numeroButao == 8)) {
+                        if (bt[numeroButao].getText() == "X" & bt[numeroButao - 1].getText() == "X") {
+                            if (proximaJogada <= 3) {
+                                if (bt[numeroButao - 2].getText() != "X" & bt[numeroButao - 2].getText() != "O") {
+                                    flagJaJogou = 1;
+                                    jaJogou=1;
+                                    bt[numeroButao - 2].setText("O");
+                                    contadorX_Y = 1;
+                                    validarXeY[numeroButao - 2] = 1;
+                                    acharButao = 1;
+                                } else if (bt[random].getText() != "X" & bt[random].getText() != "O") {
+                                    acharButao = 1;
+                                }
+                            } else if (bt[random].getText() != "X" & bt[random].getText() != "O") {
+                                acharButao = 1;
+                            }
+                        } else if (bt[random].getText() != "X" & bt[random].getText() != "O") {
+                            acharButao = 1;
+                        }
+                    } else if (bt[random].getText() != "X" & bt[random].getText() != "O") {
+                        acharButao = 1;
+                    }
+//Jogada Vertical, quando o jogador poe o X encima de outro X
+                    if (jaJogou==0 & (numeroButao == 0 || numeroButao == 3 || numeroButao == 6)) {
+                        if (bt[numeroButao].getText() == "X" & bt[numeroButao + 1].getText() == "X") {
+                            if (proximaJogada <= 3) {
+                                if (bt[numeroButao + 2].getText() != "X" & bt[numeroButao + 2].getText() != "O") {
+                                    flagJaJogou = 1;
+                                    jaJogou=1;
+                                    bt[numeroButao + 2].setText("O");
+                                    contadorX_Y = 1;
+                                    validarXeY[numeroButao + 2] = 1;
+                                    acharButao = 1;
+                                } else if (bt[random].getText() != "X" & bt[random].getText() != "O") {
+                                    acharButao = 1;
+                                }
+                            } else if (bt[random].getText() != "X" & bt[random].getText() != "O") {
+                                acharButao = 1;
+                            }
+                        } else if (bt[random].getText() != "X" & bt[random].getText() != "O") {
+                            acharButao = 1;
+                        }
+                    } else if (bt[random].getText() != "X" & bt[random].getText() != "O") {
+                        acharButao = 1;
+                    }
+//Jogada Vertical, quando o jogador poe o X no meio
+                    if (jaJogou==0 & (numeroButao == 1 || numeroButao == 4 || numeroButao == 7)) {
+                        if (bt[numeroButao].getText() == "X" & bt[numeroButao + 1].getText() == "X") {
+                            if (proximaJogada <= 3) {
+                                if (bt[numeroButao - 1].getText() != "X" & bt[numeroButao - 1].getText() != "O") {
+                                    flagJaJogou = 1;
+                                    jaJogou=1;
+                                    bt[numeroButao - 1].setText("O");
+                                    contadorX_Y = 1;
+                                    validarXeY[numeroButao - 1] = 1;
+                                    acharButao = 1;
+                                } else if (bt[random].getText() != "X" & bt[random].getText() != "O") {
+                                    acharButao = 1;
+                                }
+                            } else if (bt[random].getText() != "X" & bt[random].getText() != "O") {
+                                acharButao = 1;
+                            }
+                        } else if (bt[numeroButao].getText() == "X" & bt[numeroButao - 1].getText() == "X") {
+                            if (proximaJogada <= 3) {
+                                if (bt[numeroButao + 1].getText() != "X" & bt[numeroButao + 1].getText() != "O") {
+                                    flagJaJogou = 1;
+                                    jaJogou=1;;
+                                    bt[numeroButao + 1].setText("O");
+                                    contadorX_Y = 1;
+                                    validarXeY[numeroButao + 1] = 1;
+                                    acharButao = 1;
+                                } else if (bt[random].getText() != "X" & bt[random].getText() != "O") {
+                                    acharButao = 1;
+                                }
+                            } else if (bt[random].getText() != "X" & bt[random].getText() != "O") {
+                                acharButao = 1;
+                            }
+                        } else if (bt[random].getText() != "X" & bt[random].getText() != "O") {
+                            acharButao = 1;
+                        }
+                    } else if (bt[random].getText() != "X" & bt[random].getText() != "O") {
+                        acharButao = 1;
+                    }
+//Jogada Vertical, quando o jogador poe o X separado de outro X duas casas encima
+                    if (jaJogou==0 & (numeroButao == 2 || numeroButao == 5 || numeroButao == 8)) {
+                        if (bt[numeroButao].getText() == "X" & bt[numeroButao - 2].getText() == "X") {
+                            if (proximaJogada <= 3) {
+                                if (bt[numeroButao - 1].getText() != "X" & bt[numeroButao - 1].getText() != "O") {
+                                    flagJaJogou = 1;
+                                    jaJogou=1;
+                                    bt[numeroButao - 1].setText("O");
+                                    contadorX_Y = 1;
+                                    validarXeY[numeroButao - 1] = 1;
+                                    acharButao = 1;
+                                } else if (bt[random].getText() != "X" & bt[random].getText() != "O") {
+                                    acharButao = 1;
+                                }
+                            } else if (bt[random].getText() != "X" & bt[random].getText() != "O") {
+                                acharButao = 1;
+                            }
+                        } else if (bt[random].getText() != "X" & bt[random].getText() != "O") {
+                            acharButao = 1;
+                        }
+                    } else if (bt[random].getText() != "X" & bt[random].getText() != "O") {
+                        acharButao = 1;
+                    }
+//Jogada Vertical, quando o jogador poe o X separado de outro X duas casas abaixo
+                    if (jaJogou==0 & (numeroButao == 0 || numeroButao == 3 || numeroButao == 6)) {
+                        if (bt[numeroButao].getText() == "X" & bt[numeroButao + 2].getText() == "X") {
+                            if (proximaJogada <= 3) {
+                                if (bt[numeroButao + 1].getText() != "X" & bt[numeroButao + 1].getText() != "O") {
+                                    flagJaJogou = 1;
+                                    jaJogou=1;
+                                    bt[numeroButao + 1].setText("O");
+                                    contadorX_Y = 1;
+                                    validarXeY[numeroButao + 1] = 1;
+                                    acharButao = 1;
+                                } else if (bt[random].getText() != "X" & bt[random].getText() != "O") {
+                                    acharButao = 1;
+                                };
+
+                            } else if (bt[random].getText() != "X" & bt[random].getText() != "O") {
+                                acharButao = 1;
+                            }
+                        } else if (bt[random].getText() != "X" & bt[random].getText() != "O") {
+                            acharButao = 1;
+                        }
+                    } else if (bt[random].getText() != "X" & bt[random].getText() != "O") {
+                        acharButao = 1;
+                    }
+//Jogada diagonal \ , quando o jogador poe o X no canto inferior direito
+                    if (jaJogou==0 & (numeroButao == 8)) {
+                        if (bt[numeroButao].getText() == "X" & bt[0].getText() == "X") {
+                            if (proximaJogada <= 3) {
+                                if (bt[4].getText() != "X" & bt[4].getText() != "O") {
+                                    flagJaJogou = 1;
+                                    jaJogou=1;
+                                    bt[4].setText("O");
+                                    contadorX_Y = 1;
+                                    validarXeY[4] = 1;
+                                    acharButao = 1;
+                                } else if (bt[random].getText() != "X" & bt[random].getText() != "O") {
+                                    acharButao = 1;
+                                }
+                            } else if (bt[random].getText() != "X" & bt[random].getText() != "O") {
+                                acharButao = 1;
+                            }
+                        } else if (bt[numeroButao].getText() == "X" & bt[4].getText() == "X") {
+                            if (proximaJogada <= 3) {
+                                if (bt[0].getText() != "X" & bt[0].getText() != "O") {
+                                    flagJaJogou = 1;
+                                    jaJogou=1;
+                                    bt[0].setText("O");
+                                    contadorX_Y = 1;
+                                    validarXeY[0] = 1;
+                                    acharButao = 1;
+                                } else if (bt[random].getText() != "X" & bt[random].getText() != "O") {
+                                    acharButao = 1;
+                                }
+                            } else if (bt[random].getText() != "X" & bt[random].getText() != "O") {
+                                acharButao = 1;
+                            }
+                        } else if (bt[random].getText() != "X" & bt[random].getText() != "O") {
+                            acharButao = 1;
+                        }
+                    } else if (bt[random].getText() != "X" & bt[random].getText() != "O") {
+                        acharButao = 1;
+                    }
+//Jogada diagonal \ , quando o jogador poe o X no canto superior esquerdo
+                    if (jaJogou==0 & (numeroButao == 0)) {
+                        if (bt[numeroButao].getText() == "X" & bt[4].getText() == "X") {
+                            if (proximaJogada <= 3) {
+                                if (bt[8].getText() != "X" & bt[8].getText() != "O") {
+                                    flagJaJogou = 1;
+                                    jaJogou=1;
+                                    bt[8].setText("O");
+                                    contadorX_Y = 1;
+                                    validarXeY[8] = 1;
+                                    acharButao = 1;
+                                } else if (bt[random].getText() != "X" & bt[random].getText() != "O") {
+                                    acharButao = 1;
+                                }
+                            } else if (bt[random].getText() != "X" & bt[random].getText() != "O") {
+                                acharButao = 1;
+                            }
+                        } else if (bt[numeroButao].getText() == "X" & bt[8].getText() == "X") {
+                            if (proximaJogada <= 3) {
+                                if (bt[4].getText() != "X" & bt[4].getText() != "O") {
+                                    flagJaJogou = 1;
+                                    jaJogou=1;
+                                    bt[4].setText("O");
+                                    contadorX_Y = 1;
+                                    validarXeY[4] = 1;
+                                    acharButao = 1;
+                                } else if (bt[random].getText() != "X" & bt[random].getText() != "O") {
+                                    acharButao = 1;
+                                }
+                            } else if (bt[random].getText() != "X" & bt[random].getText() != "O") {
+                                acharButao = 1;
+                            }
+                        } else if (bt[random].getText() != "X" & bt[random].getText() != "O") {
+                            acharButao = 1;
+                        }
+                    } else if (bt[random].getText() != "X" & bt[random].getText() != "O") {
+                        acharButao = 1;
+                    }
+//Jogada diagonal \ , quando o jogador poe o X no meio
+                    if (jaJogou==0 & (numeroButao == 4)) {
+                        if (bt[numeroButao].getText() == "X" & bt[0].getText() == "X") {
+                            if (proximaJogada <= 3) {
+                                if (bt[8].getText() != "X" & bt[8].getText() != "O") {
+                                    flagJaJogou = 1;
+                                    jaJogou=1;
+                                    bt[8].setText("O");
+                                    contadorX_Y = 1;
+                                    validarXeY[8] = 1;
+                                    acharButao = 1;
+                                } else if (bt[random].getText() != "X" & bt[random].getText() != "O") {
+                                    acharButao = 1;
+                                }
+                            } else if (bt[random].getText() != "X" & bt[random].getText() != "O") {
+                                acharButao = 1;
+                            }
+                        } else if (bt[numeroButao].getText() == "X" & bt[8].getText() == "X") {
+                            if (proximaJogada <= 3) {
+                                if (bt[0].getText() != "X" & bt[0].getText() != "O") {
+                                    flagJaJogou = 1;
+                                    jaJogou=1;
+                                    bt[0].setText("O");
+                                    contadorX_Y = 1;
+                                    validarXeY[0] = 1;
+                                    acharButao = 1;
+                                } else if (bt[random].getText() != "X" & bt[random].getText() != "O") {
+                                    acharButao = 1;
+                                }
+                            } else if (bt[random].getText() != "X" & bt[random].getText() != "O") {
+                                acharButao = 1;
+                            }
+                        } else if (bt[random].getText() != "X" & bt[random].getText() != "O") {
+                            acharButao = 1;
+                        }
+                    } else if (bt[random].getText() != "X" & bt[random].getText() != "O") {
+                        acharButao = 1;
+                    }
+//Jogada diagonal / , quando o jogador poe o X no canto superior direito
+                    if (jaJogou==0 & (numeroButao == 6)) {
+                        if (bt[numeroButao].getText() == "X" & bt[4].getText() == "X") {
+                            if (proximaJogada <= 3) {
+                                if (bt[2].getText() != "X" & bt[2].getText() != "O") {
+                                    flagJaJogou = 1;
+                                    jaJogou=1;
+                                    bt[2].setText("O");
+                                    contadorX_Y = 1;
+                                    validarXeY[2] = 1;
+                                    acharButao = 1;
+                                } else if (bt[random].getText() != "X" & bt[random].getText() != "O") {
+                                    acharButao = 1;
+                                }
+                            } else if (bt[random].getText() != "X" & bt[random].getText() != "O") {
+                                acharButao = 1;
+                            }
+                        } else if (bt[numeroButao].getText() == "X" & bt[2].getText() == "X") {
+                            if (proximaJogada <= 3) {
+                                if (bt[4].getText() != "X" & bt[4].getText() != "O") {
+                                    flagJaJogou = 1;
+                                    jaJogou=1;
+                                    bt[4].setText("O");
+                                    contadorX_Y = 1;
+                                    validarXeY[4] = 1;
+                                    acharButao = 1;
+                                } else if (bt[random].getText() != "X" & bt[random].getText() != "O") {
+                                    acharButao = 1;
+                                }
+                            } else if (bt[random].getText() != "X" & bt[random].getText() != "O") {
+                                acharButao = 1;
+                            }
+                        } else if (bt[random].getText() != "X" & bt[random].getText() != "O") {
+                            acharButao = 1;
+                        }
+                    }
+//Jogada diagonal / , quando o jogador poe o X no canto inferior esquerdo
+                    if (jaJogou==0 & numeroButao == 2) {
+                        if (bt[numeroButao].getText() == "X" & bt[4].getText() == "X") {
+                            if (proximaJogada <= 3) {
+                                if (bt[6].getText() != "X" & bt[6].getText() != "O") {
+                                    flagJaJogou = 1;
+                                    jaJogou=1;
+                                    bt[6].setText("O");
+                                    contadorX_Y = 1;
+                                    validarXeY[6] = 1;
+                                    acharButao = 1;
+                                } else if (bt[random].getText() != "X" & bt[random].getText() != "O") {
+                                    acharButao = 1;
+                                }
+                            } else if (bt[random].getText() != "X" & bt[random].getText() != "O") {
+                                acharButao = 1;
+                            }
+                        } else if (bt[numeroButao].getText() == "X" & bt[6].getText() == "X") {
+                            if (proximaJogada <= 3) {
+                                if (bt[4].getText() != "X" & bt[4].getText() != "O") {
+                                    flagJaJogou = 1;
+                                    jaJogou=1;
+                                    bt[4].setText("O");
+                                    contadorX_Y = 1;
+                                    validarXeY[4] = 1;
+                                    acharButao = 1;
+                                } else if (bt[random].getText() != "X" & bt[random].getText() != "O") {
+                                    acharButao = 1;
+                                }
+                            } else if (bt[random].getText() != "X" & bt[random].getText() != "O") {
+                                acharButao = 1;
+                            }
+                        } else if (bt[random].getText() != "X" & bt[random].getText() != "O") {
+                            acharButao = 1;
+                        }
+                    } else if (bt[random].getText() != "X" & bt[random].getText() != "O") {
+                        acharButao = 1;
+                    }
+//Jogada diagonal / , quando o jogador poe o X no meio 
+                    if (jaJogou==0 & numeroButao == 4) {
+                        if (bt[numeroButao].getText() == "X" & bt[2].getText() == "X") {
+                            if (proximaJogada <= 3) {
+                                if (bt[6].getText() != "X" & bt[6].getText() != "O") {
+                                    flagJaJogou = 1;
+                                    jaJogou=1;
+                                    bt[6].setText("O");
+                                    contadorX_Y = 1;
+                                    validarXeY[6] = 1;
+                                    acharButao = 1;
+                                } else if (bt[random].getText() != "X" & bt[random].getText() != "O") {
+                                    acharButao = 1;
+                                }
+                            } else if (bt[random].getText() != "X" & bt[random].getText() != "O") {
+                                acharButao = 1;
+                            }
+                        } else if (bt[numeroButao].getText() == "X" & bt[6].getText() == "X") {
+                            if (proximaJogada <= 3) {
+                                if (bt[2].getText() != "X" & bt[2].getText() != "O") {
+                                    flagJaJogou = 1;
+                                    jaJogou=1;
+                                    bt[2].setText("O");
+                                    contadorX_Y = 1;
+                                    validarXeY[2] = 1;
+                                    acharButao = 1;
+                                } else if (bt[random].getText() != "X" & bt[random].getText() != "O") {
+                                    acharButao = 1;
+                                }
+                            } else if (bt[random].getText() != "X" & bt[random].getText() != "O") {
+                                acharButao = 1;
+                            }
+                        } else if (bt[random].getText() != "X" & bt[random].getText() != "O") {
+                            acharButao = 1;
+                        }
+                    } else if (bt[random].getText() != "X" & bt[random].getText() != "O") {
+                        acharButao = 1;
+                    }
+                }
+                if (flagJaJogou == 0) {
+                    bt[random].setText("O");
+                    contadorX_Y = 1;
+                    validarXeY[random] = 1;
+                }
+            }
+        });
+    }
+
+    private void verificarGanhadores(int numEmpates) {
+        //Linhas horizontais na verificacao do X
+        if (bt[0].getText().equals("X") && bt[3].getText().equals("X") && bt[6].getText().equals("X")) {
+            JOptionPane.showMessageDialog(null, "Parabéns ao Jogador X por vencer!", "Resultado Jogo", JOptionPane.INFORMATION_MESSAGE);
+            contadorX += 1;
+            limparButoes();
+            encontrarEmpate -= 1;
+        }
+        if (bt[1].getText().equals("X") && bt[4].getText().equals("X") && bt[7].getText().equals("X")) {
+            JOptionPane.showMessageDialog(null, "Parabéns ao Jogador X por vencer!", "Resultado Jogo", JOptionPane.INFORMATION_MESSAGE);
+            contadorX += 1;
+            limparButoes();
+            encontrarEmpate -= 1;
+        }
+        if (bt[2].getText().equals("X") && bt[5].getText().equals("X") && bt[8].getText().equals("X")) {
+            JOptionPane.showMessageDialog(null, "Parabéns ao Jogador X por vencer!", "Resultado Jogo", JOptionPane.INFORMATION_MESSAGE);
+            contadorX += 1;
+            limparButoes();
+            encontrarEmpate -= 1;
+        }
+
+        //Linhas verticais na verificacao do X
+        if (bt[0].getText().equals("X") && bt[1].getText().equals("X") && bt[2].getText().equals("X")) {
+            JOptionPane.showMessageDialog(null, "Parabéns ao Jogador X por vencer!", "Resultado Jogo", JOptionPane.INFORMATION_MESSAGE);
+            contadorX += 1;
+            limparButoes();
+            encontrarEmpate -= 1;
+        }
+        if (bt[3].getText().equals("X") && bt[4].getText().equals("X") && bt[5].getText().equals("X")) {
+            JOptionPane.showMessageDialog(null, "Parabéns ao Jogador X por vencer!", "Resultado Jogo", JOptionPane.INFORMATION_MESSAGE);
+            contadorX += 1;
+            limparButoes();
+            encontrarEmpate -= 1;
+        }
+        if (bt[6].getText().equals("X") && bt[7].getText().equals("X") && bt[8].getText().equals("X")) {
+            JOptionPane.showMessageDialog(null, "Parabéns ao Jogador X por vencer!", "Resultado Jogo", JOptionPane.INFORMATION_MESSAGE);
+            contadorX += 1;
+            limparButoes();
+            encontrarEmpate -= 1;
+        }
+
+        //Linhas horizontais na verificacao do O
+        if (bt[0].getText().equals("O") && bt[3].getText().equals("O") && bt[6].getText().equals("O")) {
+            JOptionPane.showMessageDialog(null, "Parabéns ao Jogador O por vencer!", "Resultado Jogo", JOptionPane.INFORMATION_MESSAGE);
+            contadorO += 1;
+            limparButoes();
+            encontrarEmpate -= 1;
+        }
+        if (bt[1].getText().equals("O") && bt[4].getText().equals("O") && bt[7].getText().equals("O")) {
+            JOptionPane.showMessageDialog(null, "Parabéns ao Jogador O por vencer!", "Resultado Jogo", JOptionPane.INFORMATION_MESSAGE);
+            contadorO += 1;
+            limparButoes();
+            encontrarEmpate -= 1;
+        }
+        if (bt[2].getText().equals("O") && bt[5].getText().equals("O") && bt[8].getText().equals("O")) {
+            JOptionPane.showMessageDialog(null, "Parabéns ao Jogador O por vencer!", "Resultado Jogo", JOptionPane.INFORMATION_MESSAGE);
+            contadorO += 1;
+            limparButoes();
+            encontrarEmpate -= 1;
+        }
+
+        //Linhas verticais na verificacao do O
+        if (bt[0].getText().equals("O") && bt[1].getText().equals("O") && bt[2].getText().equals("O")) {
+            JOptionPane.showMessageDialog(null, "Parabéns ao Jogador O por vencer!", "Resultado Jogo", JOptionPane.INFORMATION_MESSAGE);
+            contadorO += 1;
+            limparButoes();
+            encontrarEmpate -= 1;
+        }
+        if (bt[3].getText().equals("O") && bt[4].getText().equals("O") && bt[5].getText().equals("O")) {
+            JOptionPane.showMessageDialog(null, "Parabéns ao Jogador O por vencer!", "Resultado Jogo", JOptionPane.INFORMATION_MESSAGE);
+            contadorO += 1;
+            limparButoes();
+            encontrarEmpate -= 1;
+        }
+        if (bt[6].getText().equals("O") && bt[7].getText().equals("O") && bt[8].getText().equals("O")) {
+            JOptionPane.showMessageDialog(null, "Parabéns ao Jogador O por vencer!", "Resultado Jogo", JOptionPane.INFORMATION_MESSAGE);
+            contadorO += 1;
+            limparButoes();
+            encontrarEmpate -= 1;
+        }
+
+        //Linhas diagonais na verificacao do X
+        if (bt[0].getText().equals("X") && bt[4].getText().equals("X") && bt[8].getText().equals("X")) {
+            JOptionPane.showMessageDialog(null, "Parabéns ao Jogador X por vencer!", "Resultado Jogo", JOptionPane.INFORMATION_MESSAGE);
+            contadorX += 1;
+            limparButoes();
+            encontrarEmpate -= 1;
+        }
+        if (bt[2].getText().equals("X") && bt[4].getText().equals("X") && bt[6].getText().equals("X")) {
+            JOptionPane.showMessageDialog(null, "Parabéns ao Jogador X por vencer!", "Resultado Jogo", JOptionPane.INFORMATION_MESSAGE);
+            contadorX += 1;
+            limparButoes();
+            encontrarEmpate -= 1;
+        }
+
+        //Linhas diagonais na verificacao do O
+        if (bt[0].getText().equals("O") && bt[4].getText().equals("O") && bt[8].getText().equals("O")) {
+            JOptionPane.showMessageDialog(null, "Parabéns ao Jogador O por vencer!", "Resultado Jogo", JOptionPane.INFORMATION_MESSAGE);
+            contadorO += 1;
+            limparButoes();
+            encontrarEmpate -= 1;
+        }
+        if (bt[2].getText().equals("O") && bt[4].getText().equals("O") && bt[6].getText().equals("O")) {
+            JOptionPane.showMessageDialog(null, "Parabéns ao Jogador O por vencer!", "Resultado Jogo", JOptionPane.INFORMATION_MESSAGE);
+            contadorO += 1;
+            limparButoes();
+            encontrarEmpate -= 1;
+        }
+
+        if (encontrarEmpate == numEmpates) {
+            JOptionPane.showMessageDialog(null, "Ups, parece que ouve um empate!", "Resultado Jogo", JOptionPane.INFORMATION_MESSAGE);
+            limparButoes();
+            encontrarEmpate = 0;
+        } else {
+            encontrarEmpate += 1;
+        }
+    }
+
+    private void limparButoes() {
+        bt[0].setText("");
+        bt[1].setText("");
+        bt[2].setText("");
+        bt[3].setText("");
+        bt[4].setText("");
+        bt[5].setText("");
+        bt[6].setText("");
+        bt[7].setText("");
+        bt[8].setText("");
+        validarXeY[0] = 0;
+        validarXeY[1] = 0;
+        validarXeY[2] = 0;
+        validarXeY[3] = 0;
+        validarXeY[4] = 0;
+        validarXeY[5] = 0;
+        validarXeY[6] = 0;
+        validarXeY[7] = 0;
+        validarXeY[8] = 0;
+
+        contadorX_Y = 1;
+        encontrarEmpate = 0;
+    }
+
+    public static void main(String[] args) {
+        new JogoGalo();
+    }
+}
