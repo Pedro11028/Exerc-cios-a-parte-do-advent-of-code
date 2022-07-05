@@ -6,10 +6,54 @@ import java.util.Scanner;
 public class LinhaComandosJogoGalo {
 
     public static void main(String[] args) {
+        Menu();
+    }
+
+    private static void Menu() {
+        int guardarEscolha = 0;
+        String escolherModoJogo = "0";
+        int cont = 0;
+        Scanner escolher = new Scanner(System.in);
+
+        while (cont == 0) {
+            System.out.println("Digite 1 para jogar o modo Player vs Player! ");
+            System.out.println("Digite 2 para jogar o modo Player vs Bot! ");
+            System.out.println("Digite 3 para sair! ");
+            System.out.print("Modo:  ");
+            escolherModoJogo = escolher.nextLine();
+            System.out.println();
+            System.out.println("-----------------------");
+
+            switch (escolherModoJogo) {
+                case "1":
+                    cont = 1;
+                    guardarEscolha = 1;
+                    comecoDeJogo(guardarEscolha);
+                    System.out.println("1");
+                    break;
+                case "2":
+                    cont = 1;
+                    guardarEscolha = 2;
+                    comecoDeJogo(guardarEscolha);
+                    System.out.println("2");
+                    break;
+                case "3":
+                    System.exit(0);
+                    System.out.println("3");
+                    break;
+
+                default:
+                    System.out.println("Resposta inválida!");
+                    System.out.println("-----------------------");
+            }
+        }
+
+    }
+
+    private static void comecoDeJogo(int guardarEscolha) {
         String[][] posicaoX_Y = new String[3][3];
         int[] verificarX_Y = new int[9];
         Boolean[] marcarJogadas = new Boolean[9];
-        int vezJogar = 1;
         int valorInvalidoX = 0;
         int valorInvalidoO = 0;
 
@@ -22,6 +66,58 @@ public class LinhaComandosJogoGalo {
             }
         }
 
+        if (guardarEscolha == 1) {
+            new mostrarPosicoes(posicaoX_Y);
+            new playerVSplayer(posicaoX_Y, verificarX_Y, marcarJogadas, valorInvalidoX, valorInvalidoO);
+        } else {
+
+            cont = 0;
+            while (cont == 0) {
+                String escolherDificuldade = "0";
+                Scanner escolher = new Scanner(System.in);
+
+                System.out.println("Digite 1 para jogar o modo normal contra o Bot!");
+                System.out.println("Digite 2 para jogar o modo Dificil contra o Bot! ");
+                System.out.println("Digite 3 para voltar para traz! ");
+                System.out.print("Modo:  ");
+                escolherDificuldade = escolher.nextLine();
+                System.out.println();
+                System.out.println("-----------------------");
+
+                switch (escolherDificuldade) {
+                    case "1":
+                        cont = 1;
+                        new mostrarPosicoes(posicaoX_Y);
+                        new playerVSbot(posicaoX_Y, verificarX_Y, marcarJogadas, valorInvalidoX, valorInvalidoO);
+                        System.out.println("1");
+                        break;
+                    case "2":
+                        cont = 1;
+                        new mostrarPosicoes(posicaoX_Y);
+                        System.out.println("2");
+                        break;
+                    case "3":
+                        cont = 1;
+                        Menu();
+                        break;
+                    default:
+                        System.out.println("Resposta inválida!");
+                        System.out.println("-----------------------");
+                }
+            }
+        }
+    }
+
+}
+------------------------------------------------------------------------------------------------------------------------------
+
+package com.mycompany.linhacomandosjogogalo;
+
+import java.util.Arrays;
+
+public class mostrarPosicoes {
+
+    public mostrarPosicoes(String[][] posicaoX_Y) {
         for (int i = 0; i < 3; i++) {
             System.out.println(Arrays.toString(posicaoX_Y[i]));
         }
@@ -31,24 +127,37 @@ public class LinhaComandosJogoGalo {
                 posicaoX_Y[i][j] = " ";
             }
         }
-
         System.out.println("-------------");
-        int jogar = 0;
+    }
+}
+------------------------------------------------------------------------------------------------------------------------------
 
+package com.mycompany.linhacomandosjogogalo;
+
+import java.util.Random;
+import java.util.Scanner;
+
+public class playerVSbot {
+
+    public playerVSbot(String[][] posicaoX_Y, int[] verificarX_Y, Boolean[] marcarJogadas, int valorInvalidoX, int valorInvalidoO) {
+        new selecionarVez();
+        int jogar = 0;
         while (jogar >= 0) {
             Scanner Jogadas = new Scanner(System.in);
-            char JogadaO = '9';
-            char JogadaX = '9';
+            String JogadaO = "9";
+            String JogadaX = "9";
+            Random rand = new Random();
+            int random = 0;
 
-            if (vezJogar == 1) {
-                System.out.print("player X em que posição deseja jogar? ");
-                JogadaX = Jogadas.next().charAt(0);
-                vezJogar = EscreverJogada(posicaoX_Y, verificarX_Y, marcarJogadas, JogadaX, JogadaO, valorInvalidoX, valorInvalidoO, vezJogar);
-                System.out.println(vezJogar);
+            if (selecionarVez.vezJogar == 1) {
+                System.out.println("player X em que posição deseja jogar? ");
+                JogadaX = Jogadas.nextLine();
+                new EscreverJogada(posicaoX_Y, verificarX_Y, marcarJogadas, JogadaX, JogadaO, valorInvalidoX, valorInvalidoO);
             } else {
-                System.out.print("player O em que posição deseja jogar? ");
-                JogadaO = Jogadas.next().charAt(0);
-                vezJogar = EscreverJogada(posicaoX_Y, verificarX_Y, marcarJogadas, JogadaX, JogadaO, valorInvalidoX, valorInvalidoO, vezJogar);
+                System.out.println("O bot está a jogar... ");
+                random = rand.nextInt(9);
+                JogadaO=String.valueOf(random);
+                new EscreverJogada(posicaoX_Y, verificarX_Y, marcarJogadas, JogadaX, JogadaO, valorInvalidoX, valorInvalidoO);
             }
 
             for (int i = 0; i < posicaoX_Y.length; i++) {
@@ -58,7 +167,7 @@ public class LinhaComandosJogoGalo {
                     }
                 }
             }
-            verificarGanhador(posicaoX_Y);
+            new verificarGanhador(posicaoX_Y);
 
             if (jogar == 9) {
                 System.out.println("Ups, parece que ouve um empate!");
@@ -66,335 +175,347 @@ public class LinhaComandosJogoGalo {
             } else {
                 jogar = 0;
             }
-
         }
     }
+}
+------------------------------------------------------------------------------------------------------------------------------
 
-    private static int EscreverJogada(String[][] posicaoX_Y, int[] verificarX_Y, Boolean[] marcarJogadas, char JogadaX, char JogadaO, int valorInvalidoX, int valorInvalidoO, int vezJogar) {
+package com.mycompany.linhacomandosjogogalo;
+
+import java.util.Arrays;
+
+public class EscreverJogada {
+
+    public EscreverJogada(String[][] posicaoX_Y, int[] verificarX_Y, Boolean[] marcarJogadas, String JogadaX, String JogadaO, int valorInvalidoX, int valorInvalidoO) {
         boolean mensagemInvalido = false;
 
         switch (JogadaX) {
-            case '0':
+            case "0":
                 if (marcarJogadas[0] == false) {
                     if (verificarX_Y[0] == 0) {
                         verificarX_Y[0] = 1;
                         posicaoX_Y[0][0] = "X";
                         marcarJogadas[0] = true;
-                        vezJogar = 0;
-                        System.out.println(vezJogar);
+                        selecionarVez.vezJogar = 0;
+                        System.out.println(selecionarVez.vezJogar);
                         for (int i = 0; i < 3; i++) {
                             System.out.println(Arrays.toString(posicaoX_Y[i]));
                         }
                     } else {
                         System.out.println("Esse campo já está preenchido!");
-                        vezJogar = 1;
+                        selecionarVez.vezJogar = 1;
                     }
                 }
                 break;
-            case '1':
+            case "1":
                 if (marcarJogadas[1] == false) {
                     if (verificarX_Y[1] == 0) {
                         verificarX_Y[1] = 1;
                         posicaoX_Y[0][1] = "X";
                         marcarJogadas[1] = true;
-                        vezJogar = 0;
+                        selecionarVez.vezJogar = 0;
                         for (int i = 0; i < 3; i++) {
                             System.out.println(Arrays.toString(posicaoX_Y[i]));
                         }
                     }
                 } else {
                     System.out.println("Esse campo já está preenchido!");
-                    vezJogar = 1;
+                    selecionarVez.vezJogar = 1;
                 }
 
                 break;
-            case '2':
+            case "2":
                 if (marcarJogadas[2] == false) {
                     if (verificarX_Y[2] == 0) {
                         verificarX_Y[2] = 1;
                         posicaoX_Y[0][2] = "X";
                         marcarJogadas[2] = true;
-                        vezJogar = 0;
+                        selecionarVez.vezJogar = 0;
                         for (int i = 0; i < 3; i++) {
                             System.out.println(Arrays.toString(posicaoX_Y[i]));
                         }
                     }
                 } else {
                     System.out.println("Esse campo já está preenchido!");
-                    vezJogar = 1;
+                    selecionarVez.vezJogar = 1;
                 }
 
                 break;
-            case '3':
+            case "3":
                 if (marcarJogadas[3] == false) {
                     if (verificarX_Y[3] == 0) {
                         verificarX_Y[3] = 1;
                         posicaoX_Y[1][0] = "X";
                         marcarJogadas[3] = true;
-                        vezJogar = 0;
+                        selecionarVez.vezJogar = 0;
                         for (int i = 0; i < 3; i++) {
                             System.out.println(Arrays.toString(posicaoX_Y[i]));
                         }
                     }
                 } else {
                     System.out.println("Esse campo já está preenchido!");
-                    vezJogar = 1;
+                    selecionarVez.vezJogar = 1;
                 }
 
                 break;
-            case '4':
+            case "4":
                 if (marcarJogadas[4] == false) {
                     if (verificarX_Y[4] == 0) {
                         verificarX_Y[4] = 1;
                         posicaoX_Y[1][1] = "X";
                         marcarJogadas[4] = true;
-                        vezJogar = 0;
+                        selecionarVez.vezJogar = 0;
                         for (int i = 0; i < 3; i++) {
                             System.out.println(Arrays.toString(posicaoX_Y[i]));
                         }
                     }
                 } else {
                     System.out.println("Esse campo já está preenchido!");
-                    vezJogar = 1;
+                    selecionarVez.vezJogar = 1;
                 }
 
                 break;
-            case '5':
+            case "5":
                 if (marcarJogadas[5] == false) {
                     if (verificarX_Y[5] == 0) {
                         verificarX_Y[5] = 1;
                         posicaoX_Y[1][2] = "X";
                         marcarJogadas[5] = true;
-                        vezJogar = 0;
+                        selecionarVez.vezJogar = 0;
                         for (int i = 0; i < 3; i++) {
                             System.out.println(Arrays.toString(posicaoX_Y[i]));
                         }
                     }
                 } else {
                     System.out.println("Esse campo já está preenchido!");
-                    vezJogar = 1;
+                    selecionarVez.vezJogar = 1;
                 }
 
                 break;
-            case '6':
+            case "6":
 
                 if (marcarJogadas[6] == false) {
                     if (verificarX_Y[6] == 0) {
                         verificarX_Y[6] = 1;
                         posicaoX_Y[2][0] = "X";
                         marcarJogadas[6] = true;
-                        vezJogar = 0;
+                        selecionarVez.vezJogar = 0;
                         for (int i = 0; i < 3; i++) {
                             System.out.println(Arrays.toString(posicaoX_Y[i]));
                         }
                     }
                 } else {
                     System.out.println("Esse campo já está preenchido!");
-                    vezJogar = 1;
+                    selecionarVez.vezJogar = 1;
                 }
 
                 break;
-            case '7':
+            case "7":
 
                 if (marcarJogadas[7] == false) {
                     if (verificarX_Y[7] == 0) {
                         verificarX_Y[7] = 1;
                         posicaoX_Y[2][1] = "X";
                         marcarJogadas[7] = true;
-                        vezJogar = 0;
+                        selecionarVez.vezJogar = 0;
                         for (int i = 0; i < 3; i++) {
                             System.out.println(Arrays.toString(posicaoX_Y[i]));
                         }
                     }
                 } else {
                     System.out.println("Esse campo já está preenchido!");
-                    vezJogar = 1;
+                    selecionarVez.vezJogar = 1;
                 }
 
                 break;
-            case '8':
+            case "8":
                 if (marcarJogadas[8] == false) {
                     if (verificarX_Y[8] == 0) {
                         verificarX_Y[8] = 1;
                         posicaoX_Y[2][2] = "X";
                         marcarJogadas[8] = true;
-                        vezJogar = 0;
+                        selecionarVez.vezJogar = 0;
                         for (int i = 0; i < 3; i++) {
                             System.out.println(Arrays.toString(posicaoX_Y[i]));
                         }
                     }
                 } else {
                     System.out.println("Esse campo já está preenchido!");
-                    vezJogar = 1;
+                    selecionarVez.vezJogar = 1;
                 }
 
                 break;
             default:
 
                 switch (JogadaO) {
-                    case '0':
+                    case "0":
                         if (marcarJogadas[0] == false) {
                             if (verificarX_Y[0] == 0) {
                                 verificarX_Y[0] = 1;
                                 posicaoX_Y[0][0] = "O";
                                 marcarJogadas[0] = true;
-                                vezJogar = 1;
+                                selecionarVez.vezJogar = 1;
                                 for (int i = 0; i < 3; i++) {
                                     System.out.println(Arrays.toString(posicaoX_Y[i]));
                                 }
                             }
                         } else {
                             System.out.println("Esse campo já está preenchido!");
-                            vezJogar = 0;
+                            selecionarVez.vezJogar = 0;
                         }
 
                         break;
-                    case '1':
+                    case "1":
                         if (marcarJogadas[1] == false) {
                             if (verificarX_Y[1] == 0) {
                                 verificarX_Y[1] = 1;
                                 posicaoX_Y[0][1] = "O";
                                 marcarJogadas[1] = true;
-                                vezJogar = 1;
+                                selecionarVez.vezJogar = 1;
                                 for (int i = 0; i < 3; i++) {
                                     System.out.println(Arrays.toString(posicaoX_Y[i]));
                                 }
                             }
                         } else {
                             System.out.println("Esse campo já está preenchido!");
-                            vezJogar = 0;
+                            selecionarVez.vezJogar = 0;
                         }
 
                         break;
-                    case '2':
+                    case "2":
                         if (marcarJogadas[2] == false) {
                             if (verificarX_Y[2] == 0) {
                                 verificarX_Y[2] = 1;
                                 posicaoX_Y[0][2] = "O";
                                 marcarJogadas[2] = true;
-                                vezJogar = 1;
+                                selecionarVez.vezJogar = 1;
                                 for (int i = 0; i < 3; i++) {
                                     System.out.println(Arrays.toString(posicaoX_Y[i]));
                                 }
                             }
                         } else {
                             System.out.println("Esse campo já está preenchido!");
-                            vezJogar = 0;
+                            selecionarVez.vezJogar = 0;
                         }
 
                         break;
-                    case '3':
+                    case "3":
                         if (marcarJogadas[3] == false) {
                             if (verificarX_Y[3] == 0) {
                                 verificarX_Y[3] = 1;
                                 posicaoX_Y[1][0] = "O";
                                 marcarJogadas[3] = true;
-                                vezJogar = 1;
+                                selecionarVez.vezJogar = 1;
                                 for (int i = 0; i < 3; i++) {
                                     System.out.println(Arrays.toString(posicaoX_Y[i]));
                                 }
                             }
                         } else {
                             System.out.println("Esse campo já está preenchido!");
-                            vezJogar = 0;
+                            selecionarVez.vezJogar = 0;
                         }
 
                         break;
-                    case '4':
+                    case "4":
                         if (marcarJogadas[4] == false) {
                             if (verificarX_Y[4] == 0) {
                                 verificarX_Y[4] = 1;
                                 posicaoX_Y[1][1] = "O";
                                 marcarJogadas[4] = true;
-                                vezJogar = 1;
+                                selecionarVez.vezJogar = 1;
                                 for (int i = 0; i < 3; i++) {
                                     System.out.println(Arrays.toString(posicaoX_Y[i]));
                                 }
                             }
                         } else {
                             System.out.println("Esse campo já está preenchido!");
-                            vezJogar = 0;
+                            selecionarVez.vezJogar = 0;
                         }
 
                         break;
-                    case '5':
+                    case "5":
                         if (marcarJogadas[5] == false) {
                             if (verificarX_Y[5] == 0) {
                                 verificarX_Y[5] = 1;
                                 posicaoX_Y[1][2] = "O";
                                 marcarJogadas[5] = true;
-                                vezJogar = 1;
+                                selecionarVez.vezJogar = 1;
                                 for (int i = 0; i < 3; i++) {
                                     System.out.println(Arrays.toString(posicaoX_Y[i]));
                                 }
                             }
                         } else {
                             System.out.println("Esse campo já está preenchido!");
-                            vezJogar = 0;
+                            selecionarVez.vezJogar = 0;
                         }
 
                         break;
-                    case '6':
+                    case "6":
 
                         if (marcarJogadas[6] == false) {
                             if (verificarX_Y[6] == 0) {
                                 verificarX_Y[6] = 1;
                                 posicaoX_Y[2][0] = "O";
                                 marcarJogadas[6] = true;
-                                vezJogar = 1;
+                                selecionarVez.vezJogar = 1;
                                 for (int i = 0; i < 3; i++) {
                                     System.out.println(Arrays.toString(posicaoX_Y[i]));
                                 }
                             }
                         } else {
                             System.out.println("Esse campo já está preenchido!");
-                            vezJogar = 0;
+                            selecionarVez.vezJogar = 0;
                         }
 
                         break;
-                    case '7':
+                    case "7":
 
                         if (marcarJogadas[7] == false) {
                             if (verificarX_Y[7] == 0) {
                                 verificarX_Y[7] = 1;
                                 posicaoX_Y[2][1] = "O";
                                 marcarJogadas[7] = true;
-                                vezJogar = 1;
+                                selecionarVez.vezJogar = 1;
                                 for (int i = 0; i < 3; i++) {
                                     System.out.println(Arrays.toString(posicaoX_Y[i]));
                                 }
                             }
                         } else {
                             System.out.println("Esse campo já está preenchido!");
-                            vezJogar = 0;
+                            selecionarVez.vezJogar = 0;
                         }
 
                         break;
-                    case '8':
+                    case "8":
                         if (marcarJogadas[8] == false) {
                             if (verificarX_Y[8] == 0) {
                                 verificarX_Y[8] = 1;
                                 posicaoX_Y[2][2] = "O";
                                 marcarJogadas[8] = true;
-                                vezJogar = 1;
+                                selecionarVez.vezJogar = 1;
                                 for (int i = 0; i < 3; i++) {
                                     System.out.println(Arrays.toString(posicaoX_Y[i]));
                                 }
                             }
                         } else {
                             System.out.println("Esse campo já está preenchido!");
-                            vezJogar = 0;
+                            selecionarVez.vezJogar = 0;
                         }
 
                         break;
                     default:
                 }
         }
-        return vezJogar;
     }
+}
+------------------------------------------------------------------------------------------------------------------------------
 
-    private static void verificarGanhador(String[][] posicaoX_Y) {
-        if (posicaoX_Y[0][0] == "X" & posicaoX_Y[0][1] == "X" & posicaoX_Y[0][2] == "X") {
+package com.mycompany.linhacomandosjogogalo;
+
+public class verificarGanhador {
+
+    public verificarGanhador(String[][] posicaoX_Y) {
+                if (posicaoX_Y[0][0] == "X" & posicaoX_Y[0][1] == "X" & posicaoX_Y[0][2] == "X") {
             System.out.println("O jogador X ganhou!");
             System.exit(0);
         }
@@ -446,7 +567,6 @@ public class LinhaComandosJogoGalo {
             System.exit(0);
         }
 
-        
         if (posicaoX_Y[0][0] == "X" & posicaoX_Y[1][1] == "X" & posicaoX_Y[2][2] == "X") {
             System.out.println("O jogador X ganhou!");
             System.exit(0);
@@ -464,4 +584,12 @@ public class LinhaComandosJogoGalo {
             System.exit(0);
         }
     }
+    
+}
+------------------------------------------------------------------------------------------------------------------------------
+
+package com.mycompany.linhacomandosjogogalo;
+public class selecionarVez {
+
+        public static int vezJogar = 1;
 }
