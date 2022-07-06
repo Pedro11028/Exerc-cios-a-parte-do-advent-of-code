@@ -193,14 +193,8 @@ public class EscreverJogada {
             case "0":
                 if (marcarJogadas[0] == false) {
                     if (verificarX_Y[0] == 0) {
-                        verificarX_Y[0] = 1;
                         posicaoX_Y[0][0] = "X";
-                        marcarJogadas[0] = true;
-                        selecionarVez.vezJogar = 0;
-                        System.out.println(selecionarVez.vezJogar);
-                        for (int i = 0; i < 3; i++) {
-                            System.out.println(Arrays.toString(posicaoX_Y[i]));
-                        }
+                        validarJogada(verificarX_Y, marcarJogadas, posicaoX_Y, 0, 0);
                     } else {
                         System.out.println("Esse campo já está preenchido!");
                         selecionarVez.vezJogar = 1;
@@ -210,13 +204,8 @@ public class EscreverJogada {
             case "1":
                 if (marcarJogadas[1] == false) {
                     if (verificarX_Y[1] == 0) {
-                        verificarX_Y[1] = 1;
                         posicaoX_Y[0][1] = "X";
-                        marcarJogadas[1] = true;
-                        selecionarVez.vezJogar = 0;
-                        for (int i = 0; i < 3; i++) {
-                            System.out.println(Arrays.toString(posicaoX_Y[i]));
-                        }
+                        validarJogada(verificarX_Y, marcarJogadas, posicaoX_Y, 1, 0);
                     }
                 } else {
                     System.out.println("Esse campo já está preenchido!");
@@ -227,13 +216,8 @@ public class EscreverJogada {
             case "2":
                 if (marcarJogadas[2] == false) {
                     if (verificarX_Y[2] == 0) {
-                        verificarX_Y[2] = 1;
                         posicaoX_Y[0][2] = "X";
-                        marcarJogadas[2] = true;
-                        selecionarVez.vezJogar = 0;
-                        for (int i = 0; i < 3; i++) {
-                            System.out.println(Arrays.toString(posicaoX_Y[i]));
-                        }
+                        validarJogada(verificarX_Y, marcarJogadas, posicaoX_Y, 2, 0);
                     }
                 } else {
                     System.out.println("Esse campo já está preenchido!");
@@ -244,13 +228,8 @@ public class EscreverJogada {
             case "3":
                 if (marcarJogadas[3] == false) {
                     if (verificarX_Y[3] == 0) {
-                        verificarX_Y[3] = 1;
                         posicaoX_Y[1][0] = "X";
-                        marcarJogadas[3] = true;
-                        selecionarVez.vezJogar = 0;
-                        for (int i = 0; i < 3; i++) {
-                            System.out.println(Arrays.toString(posicaoX_Y[i]));
-                        }
+                        validarJogada(verificarX_Y, marcarJogadas, posicaoX_Y, 3, 0);
                     }
                 } else {
                     System.out.println("Esse campo já está preenchido!");
@@ -261,13 +240,8 @@ public class EscreverJogada {
             case "4":
                 if (marcarJogadas[4] == false) {
                     if (verificarX_Y[4] == 0) {
-                        verificarX_Y[4] = 1;
                         posicaoX_Y[1][1] = "X";
-                        marcarJogadas[4] = true;
-                        selecionarVez.vezJogar = 0;
-                        for (int i = 0; i < 3; i++) {
-                            System.out.println(Arrays.toString(posicaoX_Y[i]));
-                        }
+                        validarJogada(verificarX_Y, marcarJogadas, posicaoX_Y, 4, 0);
                     }
                 } else {
                     System.out.println("Esse campo já está preenchido!");
@@ -278,13 +252,8 @@ public class EscreverJogada {
             case "5":
                 if (marcarJogadas[5] == false) {
                     if (verificarX_Y[5] == 0) {
-                        verificarX_Y[5] = 1;
                         posicaoX_Y[1][2] = "X";
-                        marcarJogadas[5] = true;
-                        selecionarVez.vezJogar = 0;
-                        for (int i = 0; i < 3; i++) {
-                            System.out.println(Arrays.toString(posicaoX_Y[i]));
-                        }
+                        validarJogada(verificarX_Y, marcarJogadas, posicaoX_Y, 5, 0);
                     }
                 } else {
                     System.out.println("Esse campo já está preenchido!");
@@ -296,13 +265,8 @@ public class EscreverJogada {
 
                 if (marcarJogadas[6] == false) {
                     if (verificarX_Y[6] == 0) {
-                        verificarX_Y[6] = 1;
                         posicaoX_Y[2][0] = "X";
-                        marcarJogadas[6] = true;
-                        selecionarVez.vezJogar = 0;
-                        for (int i = 0; i < 3; i++) {
-                            System.out.println(Arrays.toString(posicaoX_Y[i]));
-                        }
+                        validarJogada(verificarX_Y, marcarJogadas, posicaoX_Y, 6, 0);
                     }
                 } else {
                     System.out.println("Esse campo já está preenchido!");
@@ -314,13 +278,8 @@ public class EscreverJogada {
 
                 if (marcarJogadas[7] == false) {
                     if (verificarX_Y[7] == 0) {
-                        verificarX_Y[7] = 1;
                         posicaoX_Y[2][1] = "X";
-                        marcarJogadas[7] = true;
-                        selecionarVez.vezJogar = 0;
-                        for (int i = 0; i < 3; i++) {
-                            System.out.println(Arrays.toString(posicaoX_Y[i]));
-                        }
+                        validarJogada(verificarX_Y, marcarJogadas, posicaoX_Y, 7, 0);
                     }
                 } else {
                     System.out.println("Esse campo já está preenchido!");
@@ -331,13 +290,8 @@ public class EscreverJogada {
             case "8":
                 if (marcarJogadas[8] == false) {
                     if (verificarX_Y[8] == 0) {
-                        verificarX_Y[8] = 1;
                         posicaoX_Y[2][2] = "X";
-                        marcarJogadas[8] = true;
-                        selecionarVez.vezJogar = 0;
-                        for (int i = 0; i < 3; i++) {
-                            System.out.println(Arrays.toString(posicaoX_Y[i]));
-                        }
+                        validarJogada(verificarX_Y, marcarJogadas, posicaoX_Y, 8, 0);
                     }
                 } else {
                     System.out.println("Esse campo já está preenchido!");
@@ -351,13 +305,8 @@ public class EscreverJogada {
                     case "0":
                         if (marcarJogadas[0] == false) {
                             if (verificarX_Y[0] == 0) {
-                                verificarX_Y[0] = 1;
                                 posicaoX_Y[0][0] = "O";
-                                marcarJogadas[0] = true;
-                                selecionarVez.vezJogar = 1;
-                                for (int i = 0; i < 3; i++) {
-                                    System.out.println(Arrays.toString(posicaoX_Y[i]));
-                                }
+                                validarJogada(verificarX_Y, marcarJogadas, posicaoX_Y, 0, 1);
                             }
                         } else {
                             System.out.println("Esse campo já está preenchido!");
@@ -368,13 +317,8 @@ public class EscreverJogada {
                     case "1":
                         if (marcarJogadas[1] == false) {
                             if (verificarX_Y[1] == 0) {
-                                verificarX_Y[1] = 1;
                                 posicaoX_Y[0][1] = "O";
-                                marcarJogadas[1] = true;
-                                selecionarVez.vezJogar = 1;
-                                for (int i = 0; i < 3; i++) {
-                                    System.out.println(Arrays.toString(posicaoX_Y[i]));
-                                }
+                                validarJogada(verificarX_Y, marcarJogadas, posicaoX_Y, 1, 1);
                             }
                         } else {
                             System.out.println("Esse campo já está preenchido!");
@@ -385,13 +329,8 @@ public class EscreverJogada {
                     case "2":
                         if (marcarJogadas[2] == false) {
                             if (verificarX_Y[2] == 0) {
-                                verificarX_Y[2] = 1;
                                 posicaoX_Y[0][2] = "O";
-                                marcarJogadas[2] = true;
-                                selecionarVez.vezJogar = 1;
-                                for (int i = 0; i < 3; i++) {
-                                    System.out.println(Arrays.toString(posicaoX_Y[i]));
-                                }
+                                validarJogada(verificarX_Y, marcarJogadas, posicaoX_Y, 2, 1);
                             }
                         } else {
                             System.out.println("Esse campo já está preenchido!");
@@ -402,13 +341,8 @@ public class EscreverJogada {
                     case "3":
                         if (marcarJogadas[3] == false) {
                             if (verificarX_Y[3] == 0) {
-                                verificarX_Y[3] = 1;
                                 posicaoX_Y[1][0] = "O";
-                                marcarJogadas[3] = true;
-                                selecionarVez.vezJogar = 1;
-                                for (int i = 0; i < 3; i++) {
-                                    System.out.println(Arrays.toString(posicaoX_Y[i]));
-                                }
+                                validarJogada(verificarX_Y, marcarJogadas, posicaoX_Y, 3, 1);
                             }
                         } else {
                             System.out.println("Esse campo já está preenchido!");
@@ -419,13 +353,8 @@ public class EscreverJogada {
                     case "4":
                         if (marcarJogadas[4] == false) {
                             if (verificarX_Y[4] == 0) {
-                                verificarX_Y[4] = 1;
                                 posicaoX_Y[1][1] = "O";
-                                marcarJogadas[4] = true;
-                                selecionarVez.vezJogar = 1;
-                                for (int i = 0; i < 3; i++) {
-                                    System.out.println(Arrays.toString(posicaoX_Y[i]));
-                                }
+                                validarJogada(verificarX_Y, marcarJogadas, posicaoX_Y, 4, 1);
                             }
                         } else {
                             System.out.println("Esse campo já está preenchido!");
@@ -436,13 +365,8 @@ public class EscreverJogada {
                     case "5":
                         if (marcarJogadas[5] == false) {
                             if (verificarX_Y[5] == 0) {
-                                verificarX_Y[5] = 1;
                                 posicaoX_Y[1][2] = "O";
-                                marcarJogadas[5] = true;
-                                selecionarVez.vezJogar = 1;
-                                for (int i = 0; i < 3; i++) {
-                                    System.out.println(Arrays.toString(posicaoX_Y[i]));
-                                }
+                                validarJogada(verificarX_Y, marcarJogadas, posicaoX_Y, 5, 1);
                             }
                         } else {
                             System.out.println("Esse campo já está preenchido!");
@@ -454,13 +378,8 @@ public class EscreverJogada {
 
                         if (marcarJogadas[6] == false) {
                             if (verificarX_Y[6] == 0) {
-                                verificarX_Y[6] = 1;
                                 posicaoX_Y[2][0] = "O";
-                                marcarJogadas[6] = true;
-                                selecionarVez.vezJogar = 1;
-                                for (int i = 0; i < 3; i++) {
-                                    System.out.println(Arrays.toString(posicaoX_Y[i]));
-                                }
+                                validarJogada(verificarX_Y, marcarJogadas, posicaoX_Y, 6, 1);
                             }
                         } else {
                             System.out.println("Esse campo já está preenchido!");
@@ -472,13 +391,8 @@ public class EscreverJogada {
 
                         if (marcarJogadas[7] == false) {
                             if (verificarX_Y[7] == 0) {
-                                verificarX_Y[7] = 1;
                                 posicaoX_Y[2][1] = "O";
-                                marcarJogadas[7] = true;
-                                selecionarVez.vezJogar = 1;
-                                for (int i = 0; i < 3; i++) {
-                                    System.out.println(Arrays.toString(posicaoX_Y[i]));
-                                }
+                                validarJogada(verificarX_Y, marcarJogadas, posicaoX_Y, 7, 1);
                             }
                         } else {
                             System.out.println("Esse campo já está preenchido!");
@@ -489,13 +403,8 @@ public class EscreverJogada {
                     case "8":
                         if (marcarJogadas[8] == false) {
                             if (verificarX_Y[8] == 0) {
-                                verificarX_Y[8] = 1;
                                 posicaoX_Y[2][2] = "O";
-                                marcarJogadas[8] = true;
-                                selecionarVez.vezJogar = 1;
-                                for (int i = 0; i < 3; i++) {
-                                    System.out.println(Arrays.toString(posicaoX_Y[i]));
-                                }
+                                validarJogada(verificarX_Y, marcarJogadas, posicaoX_Y, 8, 1);
                             }
                         } else {
                             System.out.println("Esse campo já está preenchido!");
@@ -507,6 +416,15 @@ public class EscreverJogada {
                 }
         }
     }
+
+    private void validarJogada(int[] verificarX_Y, Boolean[] marcarJogadas, String[][] posicaoX_Y, int num, int vezJogar) {
+        verificarX_Y[num] = 1;
+        marcarJogadas[num] = true;
+        selecionarVez.vezJogar = vezJogar;
+        for (int i = 0; i < 3; i++) {
+            System.out.println(Arrays.toString(posicaoX_Y[i]));
+        }
+    }
 }
 ------------------------------------------------------------------------------------------------------------------------------
 
@@ -515,76 +433,24 @@ package com.mycompany.linhacomandosjogogalo;
 public class verificarGanhador {
 
     public verificarGanhador(String[][] posicaoX_Y) {
-                if (posicaoX_Y[0][0] == "X" & posicaoX_Y[0][1] == "X" & posicaoX_Y[0][2] == "X") {
+//Verifica atravez de combinações das posições do X se existe algum ganhador se sim, escreve uma mensagem e acaba o programa 
+        if ((posicaoX_Y[0][0] == "X" & posicaoX_Y[0][1] == "X" & posicaoX_Y[0][2] == "X") || (posicaoX_Y[1][0] == "X" & posicaoX_Y[1][1] == "X" & posicaoX_Y[1][2] == "X")
+        || (posicaoX_Y[2][0] == "X" & posicaoX_Y[2][1] == "X" & posicaoX_Y[2][2] == "X") || (posicaoX_Y[0][0] == "X" & posicaoX_Y[1][0] == "X" & posicaoX_Y[2][0] == "X")
+        || (posicaoX_Y[0][1] == "X" & posicaoX_Y[1][1] == "X" & posicaoX_Y[2][1] == "X") || (posicaoX_Y[0][2] == "X" & posicaoX_Y[1][2] == "X" & posicaoX_Y[2][2] == "X")
+        || (posicaoX_Y[0][2] == "X" & posicaoX_Y[1][1] == "X" & posicaoX_Y[2][0] == "X") || (posicaoX_Y[0][0] == "X" & posicaoX_Y[1][1] == "X" & posicaoX_Y[2][2] == "X")) {
             System.out.println("O jogador X ganhou!");
             System.exit(0);
         }
-        if (posicaoX_Y[1][0] == "X" & posicaoX_Y[1][1] == "X" & posicaoX_Y[1][2] == "X") {
-            System.out.println("O jogador X ganhou!");
-            System.exit(0);
-        }
-        if (posicaoX_Y[2][0] == "X" & posicaoX_Y[2][1] == "X" & posicaoX_Y[2][2] == "X") {
-            System.out.println("O jogador X ganhou!");
-            System.exit(0);
-        }
-
-        if (posicaoX_Y[0][0] == "X" & posicaoX_Y[1][0] == "X" & posicaoX_Y[2][0] == "X") {
-            System.out.println("O jogador X ganhou!");
-            System.exit(0);
-        }
-        if (posicaoX_Y[0][1] == "X" & posicaoX_Y[1][1] == "X" & posicaoX_Y[2][1] == "X") {
-            System.out.println("O jogador X ganhou!");
-            System.exit(0);
-        }
-        if (posicaoX_Y[0][2] == "X" & posicaoX_Y[1][2] == "X" & posicaoX_Y[2][2] == "X") {
-            System.out.println("O jogador X ganhou!");
-            System.exit(0);
-        }
-
-        if (posicaoX_Y[0][0] == "O" & posicaoX_Y[0][1] == "O" & posicaoX_Y[0][2] == "O") {
-            System.out.println("O jogador O ganhou!");
-            System.exit(0);
-        }
-        if (posicaoX_Y[1][0] == "O" & posicaoX_Y[1][1] == "O" & posicaoX_Y[1][2] == "O") {
-            System.out.println("O jogador O ganhou!");
-            System.exit(0);
-        }
-        if (posicaoX_Y[2][0] == "O" & posicaoX_Y[2][1] == "O" & posicaoX_Y[2][2] == "O") {
-            System.out.println("O jogador O ganhou!");
-            System.exit(0);
-        }
-
-        if (posicaoX_Y[0][0] == "O" & posicaoX_Y[1][0] == "O" & posicaoX_Y[2][0] == "O") {
-            System.out.println("O jogador O ganhou!");
-            System.exit(0);
-        }
-        if (posicaoX_Y[0][1] == "O" & posicaoX_Y[1][1] == "O" & posicaoX_Y[2][1] == "O") {
-            System.out.println("O jogador O ganhou!");
-            System.exit(0);
-        }
-        if (posicaoX_Y[0][2] == "O" & posicaoX_Y[1][2] == "O" & posicaoX_Y[2][2] == "O") {
-            System.out.println("O jogador O ganhou!");
-            System.exit(0);
-        }
-
-        if (posicaoX_Y[0][0] == "X" & posicaoX_Y[1][1] == "X" & posicaoX_Y[2][2] == "X") {
-            System.out.println("O jogador X ganhou!");
-            System.exit(0);
-        }
-        if (posicaoX_Y[0][2] == "X" & posicaoX_Y[1][1] == "X" & posicaoX_Y[2][0] == "X") {
-            System.out.println("O jogador X ganhou!");
-            System.exit(0);
-        }
-        if (posicaoX_Y[0][0] == "O" & posicaoX_Y[1][1] == "O" & posicaoX_Y[2][2] == "O") {
-            System.out.println("O jogador O ganhou!");
-            System.exit(0);
-        }
-        if (posicaoX_Y[0][2] == "O" & posicaoX_Y[1][1] == "O" & posicaoX_Y[2][0] == "O") {
+//Verifica atravez de combinações das posições do O se existe algum ganhador se sim, escreve uma mensagem e acaba o programa      
+        if ((posicaoX_Y[0][0] == "O" & posicaoX_Y[0][1] == "O" & posicaoX_Y[0][2] == "O") || (posicaoX_Y[1][0] == "O" & posicaoX_Y[1][1] == "O" & posicaoX_Y[1][2] == "O")
+        || (posicaoX_Y[2][0] == "O" & posicaoX_Y[2][1] == "O" & posicaoX_Y[2][2] == "O") || (posicaoX_Y[0][0] == "O" & posicaoX_Y[1][0] == "O" & posicaoX_Y[2][0] == "O")
+        || (posicaoX_Y[0][1] == "O" & posicaoX_Y[1][1] == "O" & posicaoX_Y[2][1] == "O") || (posicaoX_Y[0][2] == "O" & posicaoX_Y[1][2] == "O" & posicaoX_Y[2][2] == "O")
+        || (posicaoX_Y[0][0] == "O" & posicaoX_Y[1][1] == "O" & posicaoX_Y[2][2] == "O") || (posicaoX_Y[0][2] == "O" & posicaoX_Y[1][1] == "O" & posicaoX_Y[2][0] == "O") ) {
             System.out.println("O jogador O ganhou!");
             System.exit(0);
         }
     }
-    
+
 }
 ------------------------------------------------------------------------------------------------------------------------------
 
